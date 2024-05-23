@@ -32,9 +32,9 @@ xjy_admin提供了以下演示和文档资源:
 -
 
 ## 效果展示
-![alt text](image.png)
+![alt text](/src/doc/image.png)
 
-![alt text](image-1.png)
+![alt text](/src/doc/image-1.png)
 
 
 
