@@ -1,5 +1,5 @@
- <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">
- <img src="/src/assets/logo.jpg"/>
+ <h1 align="center" style="margin: 30px 0 30px;display: flex;align-items: center;font-weight: bold;">
+ <img src="/src/assets/logo.jpg" style="width:50px;height:50px" />
  xjy_admin
  </h1>
 
