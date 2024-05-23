@@ -1,4 +1,4 @@
-  <img aligin="center" src="/src/assets/logo.jpg" style="width:50px;height:50px;" />
+<img src="/src/assets/logo.jpg" style="width:50px;height:50px;text-aligin:center" />
  <h1 align="center" style="margin: 30px 0 30px;display: flex;align-items: center;font-weight: bold;">
  xjy_admin
  </h1>
