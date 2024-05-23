@@ -1,4 +1,7 @@
-<img src="/src/assets/logo.jpg" style="margin: 30px 0 30px;" />
+ <div align="center">
+  <img src="/src/assets/logo.jpg" />
+ </div>
+
  <h1 align="center" style="margin: 30px 0 30px;display: flex;align-items: center;font-weight: bold;">
  xjy_admin
  </h1>
@@ -10,8 +13,9 @@
     <img src="https://img.shields.io/badge/Vite-%5E5.2.8-%23A552FE"/>
     <img src="https://img.shields.io/badge/Element_plus-2.7.1-%23409EFF"/>
     <img src="https://img.shields.io/badge/Author-%20Dragon_xjy-blue"/>
-    <img src="https://img.shields.io/badge/%E9%80%9A%E7%94%A8%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86-xjy_admin-red
-"/>
+    <img src="https://img.shields.io/badge/%E9%80%9A%E7%94%A8%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86-xjy_admin-red"/>
+    <img src="https://gitee.com/dragon-xjy/xjy_admin/badge/star.svg"/>
+    <img src="https://gitee.com/dragon-xjy/xjy_admin/badge/fork.svg"/>
 </div>
 
 ## 特性
