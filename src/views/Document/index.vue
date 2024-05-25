@@ -1,7 +1,7 @@
 <template>
   <div class="document">
     <iframe
-      src="https://juejin.cn/user/1368213338982584"
+      src="https://juejin.cn/spost/7372428867334864948"
       frameborder="0"
     ></iframe>
   </div>

@@ -39,7 +39,9 @@
                   的轻量级（自用）后台管理模板！！
                 </text>
                 <text>
-                  <el-button type="primary">文档说明</el-button>
+                  <el-button type="primary" @click="goDocument">
+                    文档说明
+                  </el-button>
                 </text>
               </div>
             </el-card>
@@ -182,6 +184,9 @@ const goVite = () => {
 }
 const goECharts = () => {
   window.open("https://echarts.apache.org/zh/index.html")
+}
+const goDocument = () => {
+  window.open("https://juejin.cn/spost/7372428867334864948")
 }
 // 异步加载图表
 const chartComponent = (val: string) => {

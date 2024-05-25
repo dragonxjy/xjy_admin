@@ -13,33 +13,25 @@
       @click="toggle"
       v-show="defaultSettings.isFullScreen"
     >
-      <SvgIcon
-        icon="fullScreen"
-        width="15px"
-        height="15px"
+      <img
+        src="../../../../../assets/config/fullScreen.svg"
         v-show="!isFullscreen"
       />
-      <SvgIcon
-        icon="nofullScreen"
-        width="15px"
-        height="15px"
+      <img
+        src="../../../../../assets/config/nofullScreen.svg"
         v-show="isFullscreen"
       />
     </div>
 
     <!-- 主题切换（黑白切换） -->
     <div class="topic" @click="toggleDark">
-      <SvgIcon
-        icon="blackSky"
-        width="20px"
-        height="20px"
+      <img
+        src="../../../../../assets/config/blackSky.svg"
         class="animate__animated animate__fadeInDown animate__faster"
         v-show="settingStore.dark"
       />
-      <SvgIcon
-        icon="dayTime"
-        width="20px"
-        height="20px"
+      <img
+        src="../../../../../assets/config/dayTime.svg"
         class="animate__animated animate__fadeInDown animate__faster"
         v-show="!settingStore.dark"
       />
@@ -60,6 +52,9 @@
           <div class="nickname">{{ userStore.userinfo.username }}</div>
         </div>
         <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="goUrl">项目地址</el-dropdown-item>
+          </el-dropdown-menu>
           <el-dropdown-menu>
             <el-dropdown-item @click="loginOut">退出登录</el-dropdown-item>
           </el-dropdown-menu>
@@ -120,6 +115,9 @@ const loginOut = async () => {
     },
   })
 }
+const goUrl = () => {
+  window.open("https://gitee.com/dragon-xjy/xjy_admin")
+}
 // 设置
 const drawerShow = ref(false)
 const set = () => {
@@ -156,6 +154,10 @@ const set = () => {
     align-items: center;
     justify-content: center;
     transition: all 0.4s;
+    img {
+      width: 15px;
+      height: 15px;
+    }
     &:hover {
       background-color: $layout-header_hoverbgColor;
     }
@@ -167,6 +169,10 @@ const set = () => {
     align-items: center;
     justify-content: center;
     transition: all 0.4s;
+    img {
+      width: 20px;
+      height: 20px;
+    }
     &:hover {
       background-color: $layout-header_hoverbgColor;
     }

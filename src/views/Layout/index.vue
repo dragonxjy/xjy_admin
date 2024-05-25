@@ -8,16 +8,20 @@
       }"
     >
       <!-- 标题与logo -->
-      <LayoutLogo />
+      <MenuLogo />
       <el-menu
         router
         :default-active="$route.path"
         :collapse="flag"
-        active-text-color="aqua"
-        background-color="$layout-slider_bgColor"
+        :background-color="
+          dark
+            ? variables['menu-background-dark']
+            : variables['menu-background']
+        "
         text-color="#fff"
+        :active-text-color="variables['menu-active-text']"
       >
-        <LayoutMenu :menuRouteList="userStore.routerMenuList" />
+        <MenuItem :menuRouteList="userStore.routerMenuList" />
       </el-menu>
     </div>
     <!-- 主体 -->
@@ -32,7 +36,7 @@
       <div
         class="main-content"
         :style="{
-          backgroundColor: isDark ? '#1D1E1F' : '#fff',
+          backgroundColor: dark ? '#1D1E1F' : '#fff',
           transition: 'all 0.2s',
         }"
       >
@@ -52,11 +56,12 @@
 </template>
 
 <script setup lang="ts">
+import variables from "@/styles/variables.module.scss"
 import { defaultSettings } from "@/config/setting"
 import { useSettingStore } from "@/stores/modules/setting"
 import { useUserStore } from "@/stores/modules/user"
 import { computed, nextTick, ref, watch } from "vue"
-import LayoutLogo from "./LayoutLogo/index.vue"
+
 import { storeToRefs } from "pinia"
 const settingStore = useSettingStore()
 const userStore = useUserStore()
@@ -73,16 +78,6 @@ watch(
     })
   },
 )
-// 黑暗模式
-const isDark = computed(() => {
-  let dark = false
-  if (settingStore.dark) {
-    dark = true
-  } else {
-    dark = false
-  }
-  return dark
-})
 </script>
 
 <style scoped lang="scss">

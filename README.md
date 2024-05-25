@@ -25,17 +25,18 @@
 - 项目基本结构：
 
 
-## 预览
 ![alt text](/src/assets/doc/image-2.png)
+
+## 预览
 
 
 xjy_admin提供了以下演示和文档资源:
 
 - 账户信息：(管理员)账号：admin，密码：123456
 - 账户信息: (普通用户) 账号：user，密码：123456
-- 在线地址：
-- 文档地址
--
+- 在线地址：[xjy_admin](https://dragon-xjy.atomgit.net/xjy-admin/#/home)
+- 文档地址:[xjy_admin](https://juejin.cn/spost/7372428867334864948)
+
 
 ## 效果展示
 ![alt text](/src/assets/doc/image.png)

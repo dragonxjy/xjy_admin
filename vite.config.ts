@@ -7,12 +7,12 @@ import { createSvgIconsPlugin } from "vite-plugin-svg-icons"
 import path from "path"
 import { viteMockServe } from "vite-plugin-mock"
 import vue from "@vitejs/plugin-vue"
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   //拿到配置的环境变量
   const env = loadEnv(mode, process.cwd())
   return {
+    base: "./",
     server: {
       port: 9000, //自定义端口
     },
@@ -20,20 +20,30 @@ export default defineConfig(({ mode }) => {
       vue(),
       // ...
       AutoImport({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          ElementPlusResolver(), // 自动导入图标组件
+        ],
       }),
       //movk
       viteMockServe({
         mockPath: "./src/mock",
-        //@ts-ignore
-        localEnabled: true,
+        // localEnabled: true,
       }),
       // 主题定制
       Components({
         resolvers: [ElementPlusResolver({ importStyle: "sass" })],
+        // 指定自定义组件位置(默认:src/components)自动注册全局组件
+        dirs: [
+          "src/components/ElementPlus_components/",
+          "src/components/",
+          "src/**/components",
+        ],
+        // 生成components.d.ts
+        dts: false,
+        deep: true,
       }),
       createSvgIconsPlugin({
-        iconDirs: [path.resolve(process.cwd(), "src/assets/svgs/config")],
+        iconDirs: [path.resolve(process.cwd(), "src/assets/svgs")],
         symbolId: "icon-[dir]-[name]",
       }),
     ],
@@ -49,7 +59,8 @@ export default defineConfig(({ mode }) => {
           javascriptEnabled: true,
           // 自动导入定制化样式文件进行样式覆盖
           additionalData: `  
-          @use "@/config/public.scss" as *;
+          @use "@/styles/element/index.scss" as *;
+           @use "@/config/public.scss" as *;
           `,
         },
       },

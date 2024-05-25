@@ -22,7 +22,7 @@
         top: 0;
         left: 0;
         background-color: $layout-slider_bgColor;
-        transition: all .5s;
+        transition: all .3s;
 
 
         &.bgMenuClassDark {
@@ -38,11 +38,11 @@
             transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
 
 
-
             :deep(.el-sub-menu) {
                 .el-menu-item {
                     padding-left: 28px !important;
                 }
+
             }
 
             :deep(span) {
@@ -59,14 +59,10 @@
 
         /*子菜单悬浮样式*/
         :deep(.el-menu-item):hover {
-            background: #009577 !important;
+            background: $layout-slider_hover_bgColor !important;
         }
 
-        &.activeMenu_item {
-            :deep(.el-menu-item) {
-                background: #19AA8D !important;
-            }
-        }
+
 
         &.layout-min-menu {
             width: $layout-slider_min_width;
@@ -80,7 +76,7 @@
         left: $layout-slider_width;
         display: flex;
         flex-direction: column;
-        transition: all .5s;
+        transition: all .3s;
 
 
         .layout-header {
@@ -92,7 +88,7 @@
             width: 100%;
             padding: 10px;
             overflow: auto;
-            height: calc(100vh - $layout-header_height - 38px );
+            height: calc(100vh - $layout-header_height - 35px);
 
 
         }

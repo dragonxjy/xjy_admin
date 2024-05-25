@@ -22,14 +22,14 @@
               :class="{ avtiveTopicItemLight: !settingStore.dark }"
               @click="toggleDark"
             >
-              <SvgIcon icon="dayTime" width="20px" height="20px" />
+              <img src="../../../../assets/config/dayTime.svg" alt="" />
             </div>
             <div
               class="topicItemDark"
               :class="{ avtiveTopicItemDark: settingStore.dark }"
               @click="toggleDark"
             >
-              <SvgIcon icon="blackSky" width="20px" height="20px" />
+              <img src="../../../../assets/config/blackSky.svg" alt="" />
             </div>
           </div>
         </div>
@@ -57,7 +57,6 @@
 </template>
 
 <script setup lang="ts">
-import SvgIcon from "./../SvgIcon/index.vue"
 import { computed, ref, watch, watchEffect } from "vue"
 import { useSettingStore } from "@/stores/modules/setting"
 import { GETDARK } from "@/utils/local"
@@ -161,6 +160,10 @@ const settingStore = useSettingStore()
           position: absolute;
           left: 3px;
           top: 4px;
+          img {
+            width: 20px;
+            height: 20px;
+          }
           &.avtiveTopicItemLight {
             background-color: #fff;
             box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
@@ -176,6 +179,10 @@ const settingStore = useSettingStore()
           position: absolute;
           right: 3px;
           top: 4px;
+          img {
+            width: 20px;
+            height: 20px;
+          }
           &.avtiveTopicItemDark {
             background-color: #55555a;
             box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);

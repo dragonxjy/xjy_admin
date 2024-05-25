@@ -32,7 +32,7 @@
         <span>{{ routes.meta.title }}</span>
       </template>
       <!-- 递归循环 -->
-      <LayoutMenu :menuRouteList="routes.children" />
+      <MenuItem :menuRouteList="routes.children" />
     </el-sub-menu>
   </template>
 </template>

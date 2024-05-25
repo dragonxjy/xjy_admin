@@ -142,6 +142,7 @@ const login = async () => {
 }
 .login {
   width: 100vw;
+  min-width: 500px;
   display: flex;
   height: 100vh;
   overflow: hidden;

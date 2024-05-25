@@ -3,7 +3,7 @@
     <el-col :xs="24" :sm="24" :md="24" :lg="16">
       <div class="view">
         <!-- 封装分页器 -->
-        <Pagination
+        <El-pagination
           :config="config"
           :paginationParams="paginationParams"
           @pageChange="pageChange"
@@ -59,7 +59,7 @@ import { reactive } from "vue"
 import type {
   paginationConfigType,
   paginationParamsType,
-} from "../../../components/ElementPlus_components/el-pagination/type"
+} from "../../../components/ElementPlus_components/El-pagination/type"
 
 const config = reactive(<paginationConfigType>{
   background: true,
