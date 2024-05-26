@@ -1,5 +1,5 @@
 <template>
-  <div class="bread_crumbs">
+  <div class="bread_crumbs" v-if="defaultSettings.isShowMenu">
     <div class="toggle" @click="changeFlag">
       <el-icon size="16">
         <component :is="settingStore.flag ? 'Expand' : 'Fold'" />
@@ -10,7 +10,8 @@
       v-show="settingStore.page_setting.isShow_Bread"
     >
       <el-breadcrumb-item
-        v-for="item in route.matched"
+        v-for="(item, i) in route.matched"
+        :key="i"
         :to="{ path: item.path }"
         v-show="item.meta.title"
         class="animate__animated animate__fadeInRight animate__faster"
@@ -24,6 +25,7 @@
 <script setup lang="ts">
 import { useSettingStore } from "@/stores/modules/setting"
 import { useRoute, useRouter } from "vue-router"
+import { defaultSettings } from "@/config/setting"
 const route = useRoute()
 const router = useRouter()
 

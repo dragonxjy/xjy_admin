@@ -1,7 +1,7 @@
 <template>
   <view class="setting">
     <!-- 刷新 -->
-    <div class="refresh" @click="refresh">
+    <div class="refresh" @click="refresh" v-if="defaultSettings.isShowMenu">
       <div ref="refreshRef" class="refreshContent">
         <el-icon size="16" color="gray"><Refresh /></el-icon>
       </div>

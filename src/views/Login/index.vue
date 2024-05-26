@@ -21,7 +21,7 @@
         <div class="form">
           <img class="bg2" src="../../assets/image/login/bg2.png" alt="" />
           <div
-            class="content animate__animated animate__fadeInDown animate__fast"
+            class="content p-10 w400px rounded-xl h500px animate__animated animate__fadeInDown animate__fast"
           >
             <div class="name">
               <img src="../../assets/logo.jpg" alt="" />
@@ -61,17 +61,25 @@
             <!-- 账号信息 -->
             <div class="account_info">
               <div class="admin">
-                <div class="tip">管理员</div>
-                <text>账号：admin</text>
-                <text>密码：123456</text>
+                <div class="tip text-5">管理员</div>
+                <view class="accountNum mt-2">
+                  <text>账号：admin</text>
+                  <text class="m-l-10">密码：123456</text>
+                </view>
               </div>
               <div class="user">
-                <div class="tip">普通用户</div>
-                <text>账号：user</text>
-                <text>密码：123456</text>
+                <div class="tip text-5">普通用户</div>
+                <view class="accountNum mt-2">
+                  <text>账号：user</text>
+                  <text class="m-l-10">密码：123456</text>
+                </view>
               </div>
             </div>
-            <img class="bg3" src="../../assets/image/login/bg3.png" alt="" />
+            <img
+              class="bg3 rounded-xl"
+              src="../../assets/image/login/bg3.png"
+              alt=""
+            />
           </div>
         </div>
       </el-col>
@@ -142,10 +150,10 @@ const login = async () => {
 }
 .login {
   width: 100vw;
-  min-width: 500px;
   display: flex;
   height: 100vh;
   overflow: hidden;
+
   .el-row {
     width: 100%;
     height: 100%;
@@ -157,27 +165,25 @@ const login = async () => {
         position: relative;
         display: flex;
         .title {
-          height: 300px;
-          width: 400px;
           margin: auto;
           position: absolute;
-          top: 160px;
+          top: 160.0012px;
           right: 180px;
           display: flex;
           flex-direction: column;
           text {
             &:nth-child(1) {
-              font-size: 28px;
+              font-size: 28.0013px;
               font-weight: bold;
             }
             &:nth-child(2) {
               font-size: 12px;
-              margin-top: 10px;
+              margin-top: 10.0012px;
               color: gray;
             }
             &:nth-child(3) {
               font-size: 12px;
-              margin-top: 10px;
+              margin-top: 10.0012px;
               color: gray;
             }
           }
@@ -213,43 +219,37 @@ const login = async () => {
           width: 100%;
         }
         .el-form-item__error {
-          margin-top: 2px;
+          margin-top: 1.9988px;
         }
         .content {
-          width: 60%;
-          height: 55%;
-          display: flex;
-          padding: 20px;
-          // border: 1px red solid;
-          box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
-          flex-direction: column;
-          border-radius: 10px;
-          position: relative;
+          box-shadow: 0px 0px 10.0012px 1.9988px rgba(0, 0, 0, 0.1);
           .bg3 {
             width: 100%;
-            height: 50px;
+            height: 49.9987px;
             position: absolute;
             bottom: 0px;
             right: 0px;
           }
           .name {
             font-size: 30px;
-            margin-top: 20px;
+            width: 100%;
+            height: 20%;
             display: flex;
             align-items: center;
             justify-content: center;
             img {
-              width: 50px;
-              height: 50px;
+              width: 70.0012px;
+              height: 70.0012px;
             }
             text {
-              text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+              text-shadow: 0px 0px 10.0012px rgba(255, 255, 255, 0.6);
             }
           }
           .el-form {
-            height: 60%;
+            height: 50%;
             display: flex;
-            margin-top: 15px;
+            justify-content: center;
+            align-items: center;
             flex-direction: column;
             .el-form-item {
               width: 98%;
@@ -278,33 +278,38 @@ const login = async () => {
                 align-items: center;
                 justify-content: center;
                 border: 0;
-                margin-top: 30px;
                 color: #fff;
-                border-radius: 5px;
-                font-size: 16px;
+                border-radius: 4.9988px;
+                font-size: 16.0013px;
               }
             }
           }
           .account_info {
             width: 100%;
-            height: 100%;
+            height: 30%;
             display: flex;
             align-items: center;
-            justify-content: space-evenly;
+            flex-direction: column;
             .admin {
               display: flex;
               flex-direction: column;
-              width: 50%;
+              width: 100%;
+              height: 50%;
               text {
                 color: gray;
               }
             }
             .user {
-              width: 30%;
+              width: 100%;
               display: flex;
+              height: 50%;
               flex-direction: column;
-              text {
-                color: gray;
+              .accountNum {
+                display: flex;
+                align-items: center;
+                text {
+                  color: gray;
+                }
               }
             }
           }

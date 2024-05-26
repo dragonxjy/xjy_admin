@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "vite --open --host",
     "preview": "vite preview",
     "build": "vite build --mode production && vue-tsc --noEmit",
     "type-check": "vue-tsc --build --force",
@@ -61,6 +61,7 @@
     "stylelint-order": "^6.0.4",
     "stylelint-scss": "^6.3.0",
     "typescript": "~5.4.0",
+    "unocss": "^0.60.3",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-element-plus": "^0.8.0",
     "unplugin-vue-components": "^0.26.0",

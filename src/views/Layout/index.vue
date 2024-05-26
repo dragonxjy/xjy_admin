@@ -25,7 +25,12 @@
       </el-menu>
     </div>
     <!-- 主体 -->
-    <view class="layout-main" :class="{ 'layout-max-main': flag }">
+    <view
+      class="layout-main"
+      :class="{
+        'layout-max-main': flag,
+      }"
+    >
       <!-- 头部 -->
       <div class="layout-header">
         <Header />

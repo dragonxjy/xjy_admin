@@ -4,6 +4,9 @@ import component from "@/components/index"
 import App from "./App.vue"
 import router from "./router"
 import "element-plus/theme-chalk/dark/css-vars.css"
+// main.js
+import "virtual:uno.css"
+
 import "@/styles/index.scss"
 // svg需要的配置代码
 import "virtual:svg-icons-register"

@@ -14,4 +14,6 @@ export const defaultSettings = {
   isSet: true,
   //animate.css路由切换转场动画
   routerAnimateInType: "animate__fadeIn",
+  // 是否展示侧边栏
+  isShowMenu: true,
 }
