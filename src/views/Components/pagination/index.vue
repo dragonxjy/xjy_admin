@@ -66,7 +66,7 @@ const config = reactive(<paginationConfigType>{
   small: false,
   disabled: false,
   layout: "total, sizes, prev, pager, next, jumper",
-  page_sizes: [10, 20, 30, 40, 50],
+  page_sizes: [10, 20],
 })
 const paginationParams = reactive(<paginationParamsType>{
   page: 1,
