@@ -213,6 +213,7 @@ const login = async () => {
         align-items: center;
         justify-content: center;
         position: relative;
+
         .bg2 {
           position: absolute;
           top: 0;
@@ -223,6 +224,8 @@ const login = async () => {
         }
         .content {
           box-shadow: 0px 0px 10.0012px 1.9988px rgba(0, 0, 0, 0.1);
+          // background: url("../../assets/image/login/bg.jpg") no-repeat;
+          // background: rgba(40, 57, 101, 0.9);
           .bg3 {
             width: 100%;
             height: 49.9987px;

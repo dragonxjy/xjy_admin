@@ -14,7 +14,6 @@
     position: relative;
 
 
-
     .layout-menu {
         width: $layout-slider_width;
         height: 100vh;
@@ -72,12 +71,12 @@
     .layout-main {
         width: calc(100% - $layout-slider_width);
         position: fixed;
+        height: 100vh;
         top: 0;
         left: $layout-slider_width;
         display: flex;
         flex-direction: column;
         transition: all .3s;
-
 
         .layout-header {
             width: 100%;
@@ -88,7 +87,7 @@
             width: 100%;
             padding: 10px;
             overflow: auto;
-            height: calc(100vh - $layout-header_height - 35px);
+            height: calc(100vh - $layout-header_height);
 
 
         }
