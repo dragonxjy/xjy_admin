@@ -8,7 +8,7 @@
 import { publicFun } from "@/config/function"
 import { ElConfigProvider } from "element-plus"
 import zhCn from "element-plus/es/locale/lang/zh-cn"
-import { onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import { GETDARK } from "./utils/local"
 publicFun()
 onMounted(() => {
