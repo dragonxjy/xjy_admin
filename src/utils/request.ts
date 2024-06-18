@@ -1,25 +1,27 @@
 import { message } from "@/Hooks/Element-plus"
-import axios, {
-  type AxiosResponse,
-  type InternalAxiosRequestConfig,
-} from "axios"
 import { useUserStore } from "@/stores/modules/user"
-const request = axios.create({
+
+import axios from "axios"
+import type { Method, AxiosRequestConfig } from "axios"
+const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 5000,
 })
-request.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+// 请求拦截器
+service.interceptors.request.use((config) => {
   const userStore = useUserStore()
   if (userStore.token) {
     config.headers.token = userStore.token
   }
   return config
 })
-request.interceptors.response.use(
-  (response) => {
-    return response.data
-  },
+// 必须先拦截一下
+// 响应拦截器
+service.interceptors.response.use(
+  (response) => response.data,
   (err) => {
+    console.log(err)
+
     const errObj: any = {
       "401": "token过期了",
       "403": "无权访问",
@@ -30,4 +32,22 @@ request.interceptors.response.use(
     return Promise.reject(new Error(err))
   },
 )
+type Data<T> = {
+  code: string
+  message: string
+  data: T
+}
+const request = <T>(
+  url: string,
+  method: Method = "get",
+  data: object | string,
+  config?: AxiosRequestConfig,
+) => {
+  return service.request<T, Data<T>>({
+    url,
+    method,
+    [method.toLowerCase() === "get" ? "params" : "data"]: data,
+    ...config,
+  })
+}
 export default request

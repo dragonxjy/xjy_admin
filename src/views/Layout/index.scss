@@ -36,14 +36,6 @@
             background: url('../../assets/image/layoutBg.png') no-repeat 0% 100%;
             transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
 
-
-            :deep(.el-sub-menu) {
-                .el-menu-item {
-                    padding-left: 28px !important;
-                }
-
-            }
-
             :deep(span) {
                 font-size: $layout-slider_font_size;
             }

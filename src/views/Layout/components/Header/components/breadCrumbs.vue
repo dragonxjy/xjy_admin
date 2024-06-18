@@ -10,11 +10,11 @@
       v-show="settingStore.page_setting.isShow_Bread"
     >
       <el-breadcrumb-item
-        v-for="(item, i) in route.matched"
+        v-for="(item, i) in routeComputed"
         :key="i"
         :to="{ path: item.path }"
         v-show="item.meta.title"
-        class="animate__animated animate__fadeInRight animate__faster"
+        class="animate__animated animate__fadeInRight"
       >
         {{ item.meta.title }}
       </el-breadcrumb-item>
@@ -26,14 +26,35 @@
 import { useSettingStore } from "@/stores/modules/setting"
 import { useRoute, useRouter } from "vue-router"
 import { defaultSettings } from "@/config/setting"
+import { constRouter } from "@/router/route"
+import { computed } from "vue"
 const route = useRoute()
 const router = useRouter()
+console.log(route.matched)
 
 const settingStore = useSettingStore()
 // 切换
 const changeFlag = () => {
   settingStore.changeFlag()
 }
+console.log(route.matched)
+// 计算面包屑
+const routeComputed = computed(() => {
+  let isHasHome = route.matched.find((route) => {
+    return route.path === "/"
+  })
+  let breadcrumbRoute = [] as any
+  if (isHasHome) {
+    breadcrumbRoute = route.matched
+  } else {
+    let homeArr = constRouter.find((route) => {
+      return route.path === "/"
+    })?.children
+    breadcrumbRoute = homeArr!.concat(route.matched as any)
+  }
+
+  return breadcrumbRoute
+})
 </script>
 
 <style scoped lang="scss">

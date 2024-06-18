@@ -10,15 +10,8 @@ export const loginApi = (loginParams: {
   username: string
   password: number
 }) => {
-  return request<loginResult, any>({
-    url: "/login",
-    method: "POST",
-    data: loginParams,
-  })
+  return request<loginResult>("/login", "POST", loginParams)
 }
 export const getUserInfoApi = (token: string) => {
-  return request<any, any>({
-    url: "/user",
-    data: token,
-  })
+  return request<any>("/user", "POST", token)
 }

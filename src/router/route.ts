@@ -1,6 +1,7 @@
 /***
  * @常量路由
  */
+export const Layout = () => import("@/views/Layout/index.vue")
 export const constRouter = [
   {
     path: "/login",
@@ -11,7 +12,7 @@ export const constRouter = [
     path: "/",
     redirect: "home",
     meta: { title: "", icon: "", isShow: false },
-    component: () => import("@/views/Layout/index.vue"),
+    component: Layout,
     children: [
       {
         path: "/home",
@@ -25,7 +26,7 @@ export const constRouter = [
     path: "/",
     redirect: "home",
     meta: { title: "", icon: "", isShow: false },
-    component: () => import("@/views/Layout/index.vue"),
+    component: Layout,
     children: [
       {
         path: "/document",
@@ -49,8 +50,8 @@ export const asyncRouter = [
     path: "/components",
     name: "components",
     redirect: "/components/pagination",
-    meta: { title: "封装组件", icon: "Menu", isShow: false },
-    component: () => import("@/views/Layout/index.vue"),
+    meta: { title: "封装组件", icon: "Menu", isShow: true },
+    component: Layout,
     children: [
       {
         path: "/components/pagination",
@@ -63,6 +64,57 @@ export const asyncRouter = [
         name: "edit",
         meta: { title: "富文本编辑器 ", icon: "Monitor", isShow: true },
         component: () => import("@/views/Components/edit/index.vue"),
+      },
+    ],
+  },
+  {
+    path: "/moremenu",
+    name: "moremenu",
+    meta: { title: "多级菜单", icon: "Operation", isShow: true },
+    component: Layout,
+    children: [
+      {
+        path: "/moremenu/menu-one",
+        name: "menu-one",
+        meta: { title: "一级菜单 ", icon: "DArrowRight", isShow: true },
+        component: () => import("@/views/MoreMenu/MenuOne/index.vue"),
+        children: [
+          {
+            path: "/moremenu/menu-one/menu-two",
+            name: "menu-two",
+            meta: { title: "二级菜单 ", icon: "DArrowRight", isShow: true },
+            component: () =>
+              import("@/views/MoreMenu/MenuOne/MenuTwo/index.vue"),
+            children: [
+              {
+                path: "/moremenu/menu-one/menu-two/menu-three-1",
+                name: "menu-three-1",
+                meta: {
+                  title: "三级菜单-1",
+                  icon: "DArrowRight",
+                  isShow: true,
+                },
+                component: () =>
+                  import(
+                    "@/views/MoreMenu/MenuOne/MenuTwo/MenuThree/index-1.vue"
+                  ),
+              },
+              {
+                path: "/moremenu/menu-one/menu-two/menu-three-2",
+                name: "menu-three-2",
+                meta: {
+                  title: "三级菜单-2",
+                  icon: "DArrowRight",
+                  isShow: true,
+                },
+                component: () =>
+                  import(
+                    "@/views/MoreMenu/MenuOne/MenuTwo/MenuThree/index-2.vue"
+                  ),
+              },
+            ],
+          },
+        ],
       },
     ],
   },

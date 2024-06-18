@@ -186,7 +186,7 @@ const goECharts = () => {
   window.open("https://echarts.apache.org/zh/index.html")
 }
 const goDocument = () => {
-  window.open("https://juejin.cn/spost/7372428867334864948")
+  window.open("https://juejin.cn/post/7380283122489081856")
 }
 // 异步加载图表
 const chartComponent = (val: string) => {

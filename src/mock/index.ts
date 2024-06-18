@@ -11,7 +11,19 @@ const userinfo = [
     desc: "系统管理员",
     roles: ["系统管理员"],
     buttons: ["cuser.detail", "cuser.user"],
-    routes: ["document", "pagination", "edit", "home", "components"],
+    routes: [
+      "document",
+      "pagination",
+      "edit",
+      "home",
+      "components",
+      "menu-one",
+      "moremenu",
+      "menu-two",
+      "menu-three",
+      "menu-three-1",
+      "menu-three-2",
+    ],
     token: "System_Token",
   },
   {
@@ -61,4 +73,4 @@ const login_mock = (response: any) => {
   return { code: 200, data: { token }, message: "登录成功！" }
 }
 Mock.mock("/api/login", "post", login_mock)
-Mock.mock("/api/user", "get", userinfo_mock)
+Mock.mock("/api/user", "post", userinfo_mock)

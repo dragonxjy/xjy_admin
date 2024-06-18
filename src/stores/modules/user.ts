@@ -21,7 +21,6 @@ export const useUserStore = defineStore(
     // 用户登录
     const loginUp = async (loginParams: loginParams) => {
       const res = await loginApi(loginParams)
-
       if (res.code === 200) {
         token.value = res.data.token
         SETTOKEN(res.data.token)
@@ -39,6 +38,8 @@ export const useUserStore = defineStore(
     // 获取用户信息
     const getUserInfo = async (token: string) => {
       const res = await getUserInfoApi(token)
+      // console.log(res)
+
       if (res.code === 200) {
         userinfo.value = res.data
 
