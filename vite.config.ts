@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
           ElementPlusResolver(), // 自动导入图标组件
         ],
       }),
-      //movk
+      //mock
       viteMockServe({
         mockPath: "./src/mock",
         // localEnabled: true,

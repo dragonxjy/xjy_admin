@@ -3,6 +3,7 @@ import { useUserStore } from "@/stores/modules/user"
 
 import axios from "axios"
 import type { Method, AxiosRequestConfig } from "axios"
+import { error_code } from "./error-code"
 const service = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 5000,
@@ -20,15 +21,7 @@ service.interceptors.request.use((config) => {
 service.interceptors.response.use(
   (response) => response.data,
   (err) => {
-    console.log(err)
-
-    const errObj: any = {
-      "401": "token过期了",
-      "403": "无权访问",
-      "404": "请求地址错误",
-      "500": "服务器内部错误",
-    }
-    message("error", errObj[err.response.status] || "网络问题")
+    message("error", error_code(err.response.status) || "网络问题")
     return Promise.reject(new Error(err))
   },
 )

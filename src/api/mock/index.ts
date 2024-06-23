@@ -1,6 +1,4 @@
 import request from "@/utils/request"
-import type { responseType } from "../type/public"
-import type { AxiosPromise } from "axios"
 import type { loginResult } from "../type/user"
 
 /***
