@@ -5,6 +5,7 @@ import { GETTOKEN, REMOVETOKEN, SETTOKEN } from "@/utils/local"
 import cloneDeep from "lodash/cloneDeep"
 import { defineStore } from "pinia"
 import { ref } from "vue"
+import type { RouteLocationOptions } from "vue-router"
 
 interface loginParams {
   username: string
@@ -35,20 +36,22 @@ export const useUserStore = defineStore(
     /**
      * @路由
      */
-    const routerMenuList = ref(constRouter as any)
+    // 路由表
+    const routerMenuList = ref(constRouter as RouteLocationOptions[])
     // 获取用户信息
     const getUserInfo = async (token: string) => {
       const res = await getUserInfoApi(token)
-      // console.log(res)
 
       if (res.code === 200) {
         userinfo.value = res.data
 
         const lastRoute = filterRoute(cloneDeep(res.data.routes), asyncRouter)
 
-        //侧边栏展示(常量路由，异步路由，任意路由综合在一起)
+        //常量路由，异步路由，任意路由综合在一起,合成路由表
         routerMenuList.value = [...constRouter, ...lastRoute, ...anyRouter]
         // 动态添加路由
+        console.log(routerMenuList.value)
+
         routerMenuList.value.forEach((item: any) => {
           router.addRoute(item)
         })
@@ -61,6 +64,7 @@ export const useUserStore = defineStore(
     const filterRoute = (routes: any, asyncRoute: any) => {
       return asyncRoute.filter((route: any) => {
         let isFilter = false
+
         if (routes.includes(route.name)) {
           if (route.children && route.children.length > 0) {
             route.children = filterRoute(routes, route.children)

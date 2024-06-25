@@ -12,7 +12,6 @@
         <span>{{ routes.meta.title }}</span>
       </template>
     </el-menu-item>
-
     <!-- 判断是否有二级路由 ,且二级路由长度为1-->
     <el-menu-item
       :index="routes.children[0].path"

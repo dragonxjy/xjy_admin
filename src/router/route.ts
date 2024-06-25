@@ -11,6 +11,7 @@ export const constRouter = [
   {
     path: "/",
     redirect: "home",
+    name: "home",
     meta: { title: "", icon: "", isShow: false },
     component: Layout,
     children: [
@@ -24,7 +25,7 @@ export const constRouter = [
   },
   {
     path: "/",
-    redirect: "home",
+    name: "document",
     meta: { title: "", icon: "", isShow: false },
     component: Layout,
     children: [
@@ -46,6 +47,20 @@ export const constRouter = [
  * @异步路由也叫权限路由
  */
 export const asyncRouter = [
+  {
+    path: "/",
+    name: "canvas",
+    meta: { title: "", icon: "", isShow: false },
+    component: Layout,
+    children: [
+      {
+        path: "/canvas",
+        name: "canvas",
+        meta: { title: "canvas案例", icon: "EditPen", isShow: true },
+        component: () => import("@/views/Canvas/index.vue"),
+      },
+    ],
+  },
   {
     path: "/components",
     name: "components",

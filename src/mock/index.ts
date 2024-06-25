@@ -23,6 +23,7 @@ const userinfo = [
       "menu-three",
       "menu-three-1",
       "menu-three-2",
+      "canvas",
     ],
     token: "System_Token",
   },
