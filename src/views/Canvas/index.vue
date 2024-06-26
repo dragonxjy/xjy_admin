@@ -40,6 +40,9 @@
               placeholder="请输入文案"
             />
           </div>
+          <div class="btn">
+            <el-button type="info" @click="outPic">导出图片</el-button>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -50,13 +53,12 @@
 import debounce from "lodash/debounce"
 import { message } from "@/Hooks/Element-plus"
 import { nextTick, onMounted, ref, watch } from "vue"
-const baseUrl = location.href.split("#")[0]
-const picList = [
-  `${baseUrl}/src/assets/image/dog1.png`,
-  `${baseUrl}/src/assets/image/cat2.png`,
-  `${baseUrl}/src/assets/image/dog2.png`,
-  `${baseUrl}/src/assets/image/cat1.png`,
-] as string[]
+import cat1 from "../../assets/image/cat1.png"
+import cat2 from "../../assets/image/cat2.png"
+import dog1 from "../../assets/image/dog1.png"
+import dog2 from "../../assets/image/dog2.png"
+import canvaas_bg from "../../assets/image/canvas.webp"
+const picList = [dog1, cat2, dog2, cat1] as string[]
 const colorList = [
   "#fbd04f",
   "#a8a1dc",
@@ -85,7 +87,7 @@ const initCanvas_bg = async () => {
       ctx.value.drawImage(img, 0, 0, canvas.value.width, canvas.value.height) // 绘制第一张图片
       resolve("ok")
     }
-    img.src = `${baseUrl}/src/assets/image/canvas.webp`
+    img.src = canvaas_bg
     img.onerror = () => {
       reject("失败")
     }
@@ -165,6 +167,15 @@ watch(
     }
   }, 100),
 )
+// 导出图片
+const outPic = () => {
+  let base64 = canvas.value.toDataURL()
+  let link = document.createElement("a")
+  link.textContent = "download image"
+  link.href = base64
+  link.download = "mypainting.jpeg"
+  link.click()
+}
 </script>
 
 <style scoped lang="scss">
@@ -185,6 +196,7 @@ watch(
     padding: 5px;
     .select_img {
       cursor: pointer;
+      margin-top: 10px;
       .tit {
         font-size: 15px;
         padding-bottom: 10px;
@@ -244,7 +256,7 @@ watch(
     }
     .selece_input {
       cursor: pointer;
-      margin-top: 60px;
+      margin-top: 50px;
       .tit {
         font-size: 15px;
         font-weight: bold;
@@ -256,6 +268,14 @@ watch(
         width: 95%;
         margin: 10px;
       }
+    }
+    .btn {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      padding-right: 30px;
     }
   }
 }
