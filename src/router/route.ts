@@ -26,6 +26,7 @@ export const constRouter = [
   {
     path: "/",
     name: "document",
+    redirect: "/document",
     meta: { title: "", icon: "", isShow: false },
     component: Layout,
     children: [
@@ -50,6 +51,7 @@ export const asyncRouter = [
   {
     path: "/",
     name: "canvas",
+    redirect: "/canvas",
     meta: { title: "", icon: "", isShow: false },
     component: Layout,
     children: [
