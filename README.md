@@ -1,5 +1,5 @@
- <div align="center" >
-  <img src="/src/assets/logo.png" style="transform: scale(0.5);"/>
+ <div align="center" style="transform: scale(0.5);">
+  <img src="/src/assets/logo.png" />
  </div>
 
  <h1 align="center" style="margin: 30px 0 30px;display: flex;align-items: center;font-weight: bold;">
