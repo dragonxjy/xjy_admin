@@ -1,4 +1,4 @@
- <div align="center" style="transform: scale(0.5);">
+ <div align="center">
   <img src="/src/assets/logo.png" />
  </div>
 
