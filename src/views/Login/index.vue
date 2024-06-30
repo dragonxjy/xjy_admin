@@ -24,7 +24,7 @@
             class="content p-10 w400px rounded-xl h500px animate__animated animate__fadeInDown animate__fast"
           >
             <div class="name">
-              <img src="../../assets/logo.jpg" alt="" />
+              <img :src="basic.logo" alt="" />
               <text>
                 {{ basic.title }}
               </text>

@@ -1,7 +1,7 @@
 /***
  * @项目配置
  */
-import logo from "@/assets/logo.jpg"
+import logo from "@/assets/logo.png"
 export const basic = {
   logo,
   title: "xjy_admin",
