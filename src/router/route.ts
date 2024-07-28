@@ -10,8 +10,8 @@ export const constRouter = [
   },
   {
     path: "/",
-    redirect: "home",
-    name: "home",
+    redirect: "/home",
+    name: "layout",
     meta: { title: "", icon: "", isShow: false },
     component: Layout,
     children: [
