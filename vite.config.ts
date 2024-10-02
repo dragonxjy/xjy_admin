@@ -14,9 +14,6 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
   return {
     base: "./",
-    server: {
-      port: 9000, //自定义端口
-    },
     plugins: [
       vue(),
       UnoCSS(),
@@ -68,15 +65,15 @@ export default defineConfig(({ mode }) => {
       },
     },
     //配置代理跨域
-    // server: {
-    //   proxy: {
-    //     [env.VITE_BASE_URL]: {
-    //       target: env.VITE_URL,
-    //       changeOrigin: true,
-    //       rewrite: (path) => path.replace(/^\/api/, ''),
-    //     },
-
-    //   }
-    // }
+    server: {
+      port: 9000, //自定义端口
+      proxy: {
+        [env.VITE_BASE_URL]: {
+          target: env.VITE_URL,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ""),
+        },
+      },
+    },
   }
 })

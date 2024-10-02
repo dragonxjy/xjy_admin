@@ -30,14 +30,12 @@ import { constRouter } from "@/router/route"
 import { computed } from "vue"
 const route = useRoute()
 const router = useRouter()
-console.log(route.matched)
 
 const settingStore = useSettingStore()
 // 切换
 const changeFlag = () => {
   settingStore.changeFlag()
 }
-console.log(route.matched)
 // 计算面包屑
 const routeComputed = computed(() => {
   let isHasHome = route.matched.find((route) => {

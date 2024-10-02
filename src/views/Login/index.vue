@@ -91,7 +91,7 @@
 import { message, notification } from "@/Hooks/Element-plus"
 import { basic } from "../../config/setting"
 import { useUserStore } from "@/stores/modules/user"
-import { reactive } from "vue"
+import { nextTick, reactive } from "vue"
 import { useRoute, useRouter } from "vue-router"
 const router = useRouter()
 const route = useRoute()
@@ -129,8 +129,9 @@ let rules = reactive({
 const login = async () => {
   try {
     const mes = await userStore.loginUp(loginParams)
-    notification(mes, "您好，欢迎回来!", "success")
     router.push({ path: route.query.url as any })
+    // window.location.reload()
+    //  notification(mes, "您好，欢迎回来!", "success")
   } catch (err: any) {
     message("error", err.message)
   }

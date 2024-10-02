@@ -162,7 +162,7 @@
 
 <script setup lang="ts">
 import { useUserStore } from "@/stores/modules/user"
-import { defineAsyncComponent } from "vue"
+import { defineAsyncComponent, onMounted, watchEffect } from "vue"
 import { useRouter } from "vue-router"
 import { basic } from "../../config/setting"
 const userStore = useUserStore()

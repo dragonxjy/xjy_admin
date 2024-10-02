@@ -1,5 +1,5 @@
 import { createApp } from "vue"
-import { piniaFunction } from "./stores/index"
+import storePinia from "./stores/index"
 import component from "@/components/index"
 import App from "./App.vue"
 import router from "./router"
@@ -15,9 +15,8 @@ import "./permission"
 // 导入mock数据
 import "./mock/index"
 
-const pinia = piniaFunction()
 const app = createApp(App)
 app.use(component)
-app.use(pinia)
+app.use(storePinia)
 app.use(router)
 app.mount("#app")

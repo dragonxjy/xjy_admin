@@ -84,6 +84,7 @@ export const asyncRouter = [
       },
     ],
   },
+
   {
     path: "/moremenu",
     name: "moremenu",

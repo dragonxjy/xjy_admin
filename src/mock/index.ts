@@ -4,7 +4,6 @@ const userinfo = [
   {
     userId: 2,
     avatar:
-      "https://s1.aigei.com/prevfiles/a51818e3e5e84376bae80b10d2aa2ef8.gif?e=1735488000&token=P7S2Xpzfz11vAkASLTkfHN7Fw-oOZBecqeJaxypL:8aJsLngoetNa2SoIsHVsmsccPPo=" ||
       "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
     username: "admin",
     password: 123456,
@@ -24,8 +23,12 @@ const userinfo = [
       "menu-three-1",
       "menu-three-2",
       "canvas",
+      "news",
+      "newsList",
+      "newsType",
     ],
-    token: "System_Token",
+    token:
+      "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSCjAK0A0Ndg1S0lFKrShQsjI0N7I0MjUEUjpKpcWpRZ4pQDEI0y8xNxWoIzElNzNPqRYAHrPX-UEAAAA.u8syR60yvQ_F2-oClEs9xW31Oo1GspbLq-XHOt6xm9UE5vuArmQ63gAiZ8VaQoOtF2snegMe2BlugnoEYDzLeg",
   },
   {
     userId: 2,
@@ -36,7 +39,7 @@ const userinfo = [
     desc: "用户",
     roles: ["用户"],
     buttons: ["cuser.detail", "cuser.user"],
-    routes: ["document", "home"],
+    routes: ["document", "home", "news", "newsList", "components", "edit"],
     token: "user_Token",
   },
 ]

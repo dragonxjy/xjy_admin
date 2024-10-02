@@ -21,7 +21,7 @@
         text-color="#fff"
         :active-text-color="variables['menu-active-text']"
       >
-        <MenuItem :menuRouteList="userStore.routerMenuList" />
+        <MenuItem :menuRouteList="routerMenuList" />
       </el-menu>
     </div>
     <!-- 主体 -->
@@ -70,6 +70,7 @@ import { computed, nextTick, ref, watch } from "vue"
 import { storeToRefs } from "pinia"
 const settingStore = useSettingStore()
 const userStore = useUserStore()
+const { routerMenuList } = storeToRefs(userStore)
 const { flag, dark, page_setting } = storeToRefs(settingStore)
 let isflag = ref(true)
 // 刷新

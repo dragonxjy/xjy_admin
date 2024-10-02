@@ -2,25 +2,28 @@
 import nprogress from "./utils/nprogress"
 import { basic } from "./config/setting"
 import router from "@/router"
-import { piniaFunction } from "./stores/index"
+import piniaStore from "./stores/index"
 import { useUserStore } from "@/stores/modules/user"
 import { GETTOKEN } from "./utils/local"
 import { message } from "./Hooks/Element-plus"
+import { nextTick } from "vue"
 //在其他文件拿pinia数据，需要传入pinia实例
-const userStore = useUserStore(piniaFunction())
+const userStore = useUserStore(piniaStore)
 //全局前置守卫
 router.beforeEach(async (to, from, next) => {
   nprogress.start()
   document.title = `${basic.title}-${to.meta.title}`
+  //用户信息
+  const userInfo = userStore.userinfo
   if (GETTOKEN()) {
     if (to.path !== "/login") {
       //判断有没有用户信息
-      if (Object.keys(userStore.userinfo).length === 0) {
+      if (Object.keys(userInfo).length === 0) {
         try {
           await userStore.getUserInfo(GETTOKEN()!)
           next({ ...to })
         } catch (error: any) {
-          message("error", "重新登录")
+          message("error", error.message)
           await userStore.loginOut()
           next({ path: "/login", query: { url: to.path } })
         }
