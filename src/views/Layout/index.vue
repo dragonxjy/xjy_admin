@@ -25,7 +25,7 @@
       </el-menu>
     </div>
     <!-- 主体 -->
-    <view
+    <div
       class="layout-main"
       :class="{
         'layout-max-main': flag,
@@ -45,18 +45,16 @@
           transition: 'all 0.2s',
         }"
       >
-        <router-view v-slot="{ Component, route }">
-          <transition
-            :enter-active-class="`animate__animated ${defaultSettings.routerAnimateInType} animate__faster`"
-            mode="out-in"
-          >
-            <keep-alive>
-              <component :is="Component" :key="route.path" v-if="isflag" />
-            </keep-alive>
-          </transition>
-        </router-view>
+        <transition
+          :enter-active-class="`animate__animated ${defaultSettings.routerAnimateInType} animate__faster`"
+          mode="out-in"
+        >
+          <keep-alive>
+            <router-view v-if="isflag" />
+          </keep-alive>
+        </transition>
       </div>
-    </view>
+    </div>
   </div>
 </template>
 
