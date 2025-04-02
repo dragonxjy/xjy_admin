@@ -15,14 +15,17 @@ export default defineConfig(({ mode }) => {
   return {
     base: "./",
     plugins: [
-      vue(),
-      UnoCSS(),
       // ...
       AutoImport({
+        imports: ["vue", "vue-router"],
+        dts: "./src/types/auto-imports.d.ts",
         resolvers: [
           ElementPlusResolver(), // 自动导入图标组件
         ],
       }),
+      vue(),
+      UnoCSS(),
+
       //mock
       viteMockServe({
         mockPath: "./src/mock",
@@ -38,7 +41,7 @@ export default defineConfig(({ mode }) => {
           "src/**/components",
         ],
         // 生成components.d.ts
-        dts: false,
+        dts: "./src/types/components.d.ts",
         deep: true,
       }),
       createSvgIconsPlugin({

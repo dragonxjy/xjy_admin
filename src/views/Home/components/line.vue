@@ -4,7 +4,6 @@
 
 <script setup lang="ts">
 import * as echarts from "echarts"
-import { nextTick, onMounted, ref } from "vue"
 const lineRef = ref()
 onMounted(() => {})
 nextTick(() => {

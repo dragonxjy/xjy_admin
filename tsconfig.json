@@ -3,7 +3,11 @@
   "compilerOptions": {
     "esModuleInterop": true,
     // ...
-    "types": ["element-plus/global"]
+    "types": [
+      "unplugin-auto-import/types", // 支持自动导入类型
+      "element-plus/global",
+      "vite/client", // 支持 Vite 环境变量类型
+    ]
   },
   "references": [
     {
@@ -12,5 +16,5 @@
     {
       "path": "./tsconfig.app.json"
     }
-  ]
+  ],
 }
