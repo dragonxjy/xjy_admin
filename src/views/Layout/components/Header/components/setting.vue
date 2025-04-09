@@ -78,8 +78,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue"
-import { useRouter, useRoute } from "vue-router"
 import { defaultSettings } from "@/config/setting"
 import { useFullscreen } from "@vueuse/core"
 import { GETDARK } from "@/utils/local"
@@ -144,7 +142,7 @@ const set = () => {
       justify-content: center;
     }
     &:hover {
-      background-color: $layout-header_hoverbgColor;
+      background: $layout-header_hoverbgColor;
     }
   }
   .full_Screen {
@@ -193,10 +191,10 @@ const set = () => {
       }
     }
     &:hover {
+      background: $layout-header_hoverbgColor;
       .nickname {
         color: black;
       }
-      background-color: $layout-header_hoverbgColor;
     }
   }
   .set {

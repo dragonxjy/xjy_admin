@@ -28,10 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref, watch, watchEffect } from "vue"
-import { useRoute, useRouter } from "vue-router"
 import { useSettingStore } from "@/stores/modules/setting"
-import { computed } from "vue"
 const settingStore = useSettingStore()
 const router = useRouter()
 const route = useRoute()

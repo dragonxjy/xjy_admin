@@ -52,7 +52,6 @@
 <script setup lang="ts">
 import debounce from "lodash/debounce"
 import { message } from "@/Hooks/Element-plus"
-import { nextTick, onMounted, ref, watch } from "vue"
 import cat1 from "../../assets/image/cat1.png"
 import cat2 from "../../assets/image/cat2.png"
 import dog1 from "../../assets/image/dog1.png"
@@ -121,7 +120,7 @@ const input_val = ref("")
 
 watch(
   [() => pic_val.value, () => color_val.value, () => input_val.value],
-  debounce(async (newVal) => {
+  debounce(async (newVal: any) => {
     try {
       // 初始化背景canvas
       await initCanvas_bg()

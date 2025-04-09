@@ -63,7 +63,6 @@ import variables from "@/styles/variables.module.scss"
 import { defaultSettings } from "@/config/setting"
 import { useSettingStore } from "@/stores/modules/setting"
 import { useUserStore } from "@/stores/modules/user"
-import { computed, nextTick, ref, watch } from "vue"
 
 import { storeToRefs } from "pinia"
 const settingStore = useSettingStore()

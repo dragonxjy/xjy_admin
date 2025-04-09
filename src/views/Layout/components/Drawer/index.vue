@@ -57,7 +57,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, watchEffect } from "vue"
 import { useSettingStore } from "@/stores/modules/setting"
 import { GETDARK } from "@/utils/local"
 import { toggleDark } from "@/utils/changeDark"

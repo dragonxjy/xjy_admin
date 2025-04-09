@@ -26,6 +26,7 @@ const userinfo = [
       "news",
       "newsList",
       "newsType",
+      "echarts"
     ],
     token:
       "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSCjAK0A0Ndg1S0lFKrShQsjI0N7I0MjUEUjpKpcWpRZ4pQDEI0y8xNxWoIzElNzNPqRYAHrPX-UEAAAA.u8syR60yvQ_F2-oClEs9xW31Oo1GspbLq-XHOt6xm9UE5vuArmQ63gAiZ8VaQoOtF2snegMe2BlugnoEYDzLeg",

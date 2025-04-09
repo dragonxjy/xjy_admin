@@ -24,10 +24,8 @@
 
 <script setup lang="ts">
 import { useSettingStore } from "@/stores/modules/setting"
-import { useRoute, useRouter } from "vue-router"
 import { defaultSettings } from "@/config/setting"
 import { constRouter } from "@/router/route"
-import { computed } from "vue"
 const route = useRoute()
 const router = useRouter()
 

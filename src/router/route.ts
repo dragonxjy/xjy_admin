@@ -63,6 +63,7 @@ export const asyncRouter = [
       },
     ],
   },
+
   {
     path: "/components",
     name: "components",

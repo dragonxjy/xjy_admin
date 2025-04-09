@@ -3,7 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from "vue"
 
 const editVal = ref("Hello! WangEditor")
 watchEffect(() => {

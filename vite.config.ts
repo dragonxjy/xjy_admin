@@ -19,6 +19,12 @@ export default defineConfig(({ mode }) => {
       AutoImport({
         imports: ["vue", "vue-router"],
         dts: "./src/types/auto-imports.d.ts",
+        eslintrc: {
+          enabled: true,
+          // 指定文件存放目录
+          filepath: "./.config/eslint-auto-import.json", // 自定义路径
+        },
+        vueTemplate: true, // default false
         resolvers: [
           ElementPlusResolver(), // 自动导入图标组件
         ],
