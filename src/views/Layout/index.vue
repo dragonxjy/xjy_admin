@@ -49,9 +49,11 @@
           :enter-active-class="`animate__animated ${defaultSettings.routerAnimateInType} animate__faster`"
           mode="out-in"
         >
-          <keep-alive>
-            <router-view v-if="isflag" />
-          </keep-alive>
+          <router-view v-if="isflag" v-slot="{ Component }">
+            <keep-alive>
+              <component :is="Component" :key="$route.path" />
+            </keep-alive>
+          </router-view>
         </transition>
       </div>
     </div>
