@@ -13,7 +13,7 @@
           <el-tag
             :closable="tagViewArr.length !== 1 && i !== 0"
             @close="closeTag(i, item.path)"
-            @click="changeTag(item.path)"
+            @click="changeTag(item)"
             :class="{ tagItem: true, activeTag: route.path === item.path }"
           >
             <div class="tagContent">
@@ -45,11 +45,14 @@ const isDark = computed(() => {
 interface routeObj {
   path: string
   title: string
+  query:any
 }
 const tagViewArr = ref(<routeObj[]>[
   {
     path: "/home",
     title: "首页",
+    query:{}
+
   },
 ])
 
@@ -59,26 +62,27 @@ watch(
     let rouiteObj = <routeObj>{
       path: route.path,
       title: route.meta.title as string,
+      query: route.query,
     }
-
+    // 判断是否路劲相同
     let isInclude = tagViewArr.value.find((item: routeObj) => {
       return item.path === rouiteObj.path
     })
     if (isInclude) return
-    tagViewArr.value.push(rouiteObj)
+    tagViewArr.value=[...tagViewArr.value,rouiteObj]
   },
   { immediate: true },
 )
 
 // 切换tag
-const changeTag = (path: string) => {
-  router.push({ path })
+const changeTag = (item:any) => {
+  router.push({ path: item.path, query: item.query })
 }
 // 关闭tag
 const closeTag = (i: number, path: string) => {
   if (path === route.path) {
     tagViewArr.value.splice(i, 1)
-    router.push(tagViewArr.value[tagViewArr.value.length - 1].path)
+    router.push({path:tagViewArr.value[tagViewArr.value.length - 1].path,query:tagViewArr.value[tagViewArr.value.length - 1].query})
   } else {
     tagViewArr.value.splice(i, 1)
   }
