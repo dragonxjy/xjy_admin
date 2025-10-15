@@ -1,4 +1,3 @@
-//@ts-expect-error 禁止飘红
 import nprogress from "nprogress"
 
 import "nprogress/nprogress.css"

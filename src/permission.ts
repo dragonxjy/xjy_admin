@@ -7,10 +7,11 @@ import { useUserStore } from "@/stores/modules/user"
 import { GETTOKEN } from "./utils/local"
 import { message } from "./Hooks/Element-plus"
 import { nextTick } from "vue"
-//在其他文件拿pinia数据，需要传入pinia实例
-const userStore = useUserStore(piniaStore)
+// 在路由守卫内部获取store实例
+let userStore: ReturnType<typeof useUserStore>
 //全局前置守卫
 router.beforeEach(async (to, from, next) => {
+  userStore = useUserStore()
   nprogress.start()
   document.title = `${basic.title}-${to.meta.title}`
   //用户信息

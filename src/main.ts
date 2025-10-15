@@ -10,10 +10,10 @@ import "virtual:uno.css"
 import "@/styles/index.scss"
 // svg需要的配置代码
 import "virtual:svg-icons-register"
-// 导入路由鉴权
-import "./permission"
 // 导入mock数据
 import "./mock/index"
+// 导入路由鉴权
+import "./permission"
 
 const app = createApp(App)
 app.use(component)

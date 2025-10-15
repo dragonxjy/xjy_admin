@@ -42,7 +42,6 @@ export default defineConfig(({ mode }) => {
         resolvers: [ElementPlusResolver({ importStyle: "sass" })],
         // 指定自定义组件位置(默认:src/components)自动注册全局组件
         dirs: [
-          "src/components/ElementPlus_components/",
           "src/components/",
           "src/**/components",
         ],

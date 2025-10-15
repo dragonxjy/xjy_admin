@@ -1,20 +1,38 @@
 {
-  "files": [],
   "compilerOptions": {
-    "esModuleInterop": true,
-    // ...
+    "target": "esnext",
+    "jsx": "preserve",
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "Bundler",
     "types": [
       "unplugin-auto-import/types", // 支持自动导入类型
       "element-plus/global",
       "vite/client", // 支持 Vite 环境变量类型
-    ]
-  },
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    },
-    {
-      "path": "./tsconfig.app.json"
+    ],
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "~root/*": [
+        "./*"
+      ]
     }
+  },
+  "include": [
+    "src/App.vue",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/types/components.d.ts",
+    "src/types/auto-imports.d.ts",
+    "src/types/typed-router.d.ts"
   ],
 }

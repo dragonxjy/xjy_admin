@@ -3,7 +3,7 @@
     <el-col :xs="24" :sm="24" :md="24" :lg="16">
       <div class="view">
         <!-- 封装分页器 -->
-        <El-pagination
+        <Elpagination
           :config="config"
           :paginationParams="paginationParams"
           @pageChange="pageChange"

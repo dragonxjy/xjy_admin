@@ -7,15 +7,17 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
-.DS_Store
+
+# Build outputs
 dist
 dist-ssr
 coverage
-*.local
 
-/cypress/videos/
-/cypress/screenshots/
+# OS generated files
+.DS_Store
+*.local
 
 # Editor directories and files
 .vscode/*
@@ -27,4 +29,22 @@ coverage
 *.sln
 *.sw?
 
+# TypeScript
 *.tsbuildinfo
+
+# History
+.history
+
+# Stats
+stats.html
+
+# Lock files
+pnpm-lock.yaml
+package-lock.json
+
+# Cache files
+.stylelintcache
+.eslintcache
+
+/cypress/videos/
+/cypress/screenshots/
