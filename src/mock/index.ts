@@ -1,4 +1,4 @@
-//@ts-expect-error mock模拟数据
+
 import Mock from "mockjs"
 const userinfo = [
   {

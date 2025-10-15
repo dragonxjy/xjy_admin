@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { message } from "@/Hooks/Element-plus"
+import { message } from "@/Hooks/element"
 import type {
   paginationConfigType,
   paginationParamsType,

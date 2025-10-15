@@ -31,7 +31,6 @@ export default defineConfig(({ mode }) => {
       }),
       vue(),
       UnoCSS(),
-
       //mock
       viteMockServe({
         mockPath: "./src/mock",

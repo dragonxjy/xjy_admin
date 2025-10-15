@@ -1,4 +1,4 @@
-import { message } from "@/Hooks/Element-plus"
+import { message } from "@/Hooks/element"
 import { useUserStore } from "@/stores/modules/user"
 
 import axios from "axios"

@@ -84,7 +84,7 @@ import { GETDARK } from "@/utils/local"
 import { useSettingStore } from "@/stores/modules/setting"
 import { useUserStore } from "@/stores/modules/user"
 import { toggleDark } from "@/utils/changeDark"
-import { messageBox, notification } from "@/Hooks/Element-plus"
+import { messageBox, notification } from "@/Hooks/element"
 const { isFullscreen, toggle } = useFullscreen()
 const settingStore = useSettingStore()
 const userStore = useUserStore()

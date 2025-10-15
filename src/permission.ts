@@ -5,7 +5,7 @@ import router from "@/router"
 import piniaStore from "./stores/index"
 import { useUserStore } from "@/stores/modules/user"
 import { GETTOKEN } from "./utils/local"
-import { message } from "./Hooks/Element-plus"
+import { message } from "./Hooks/element"
 import { nextTick } from "vue"
 // 在路由守卫内部获取store实例
 let userStore: ReturnType<typeof useUserStore>

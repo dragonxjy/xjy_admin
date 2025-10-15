@@ -88,7 +88,7 @@
 </template>
 
 <script setup lang="ts">
-import { message, notification } from "@/Hooks/Element-plus"
+import { message, notification } from "@/Hooks/element"
 import { basic } from "../../config/setting"
 import { useUserStore } from "@/stores/modules/user"
 const router = useRouter()

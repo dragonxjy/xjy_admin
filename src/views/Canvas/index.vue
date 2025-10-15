@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import debounce from "lodash/debounce"
-import { message } from "@/Hooks/Element-plus"
+import { message } from "@/Hooks/element"
 import cat1 from "../../assets/image/cat1.png"
 import cat2 from "../../assets/image/cat2.png"
 import dog1 from "../../assets/image/dog1.png"
