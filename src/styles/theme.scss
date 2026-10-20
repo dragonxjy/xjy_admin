@@ -1,0 +1,200 @@
+:root {
+  color-scheme: light;
+
+  --app-bg: #f7fafc;
+  --app-surface: #fff;
+  --app-surface-soft: #f3f3f5;
+  --app-text: #1f1f1f;
+  --app-text-secondary: #333639;
+  --app-text-muted: #767c82;
+  --app-border: #efeff5;
+  --app-primary-soft: #eff0ff;
+  --app-primary: #646cff;
+  --app-success: #52c41a;
+  --app-warning: #faad14;
+  --app-danger: #f5222d;
+  --app-info: #64748b;
+  --app-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+  --app-shadow-hover: 0 6px 20px rgb(15 23 42 / 6%);
+  --app-radius: 8px;
+  --app-gap: 16px;
+  --app-sidebar-width: 220px;
+  --app-sidebar-collapsed-width: 64px;
+  --el-font-family: ui-sans-serif, system-ui, -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --el-border-radius-base: 6px;
+  --el-border-radius-small: 4px;
+  --el-box-shadow-light: var(--app-shadow-hover);
+}
+
+html.dark {
+  color-scheme: dark;
+
+  --app-bg: #121212;
+  --app-surface: #1c1c1c;
+  --app-surface-soft: #262626;
+  --app-text: #e0e0e0;
+  --app-text-secondary: #ffffffd1;
+  --app-text-muted: #ffffff61;
+  --app-border: #ffffff17;
+  --app-primary-soft: #303151;
+  --app-primary: #8b91ff;
+  --app-success: #67c23a;
+  --app-warning: #e6a23c;
+  --app-danger: #f56c6c;
+  --app-info: #909399;
+  --app-shadow: 0 1px 3px rgb(0 0 0 / 12%);
+  --app-shadow-hover: 0 6px 20px rgb(0 0 0 / 18%);
+  --el-mask-color: rgb(0 0 0 / 70%);
+}
+
+:root,
+html.dark {
+  @each $kind, $token in ("success": "success", "warning": "warning", "danger": "danger", "error": "danger", "info": "info") {
+    --el-color-#{$kind}: var(--app-#{$token});
+    --el-color-#{$kind}-dark-2: color-mix(in srgb, var(--app-#{$token}) 80%, var(--app-text));
+
+    @each $level in (3, 5, 7, 8, 9) {
+      --el-color-#{$kind}-light-#{$level}: color-mix(in srgb, var(--app-#{$token}) #{100 - $level * 10}%, var(--app-surface));
+    }
+  }
+
+  --el-color-primary: var(--app-primary);
+  --el-color-primary-light-3: color-mix(in srgb, var(--app-primary) 70%, var(--app-surface));
+  --el-color-primary-light-5: color-mix(in srgb, var(--app-primary) 50%, var(--app-surface));
+  --el-color-primary-light-7: color-mix(in srgb, var(--app-primary) 30%, var(--app-surface));
+  --el-color-primary-light-8: color-mix(in srgb, var(--app-primary) 20%, var(--app-surface));
+  --el-color-primary-light-9: var(--app-primary-soft);
+  --el-color-primary-dark-2: color-mix(in srgb, var(--app-primary) 80%, var(--app-text));
+  --el-text-color-primary: var(--app-text);
+  --el-text-color-regular: var(--app-text-secondary);
+  --el-text-color-secondary: var(--app-text-muted);
+  --el-text-color-placeholder: var(--app-text-muted);
+  --el-text-color-disabled: color-mix(in srgb, var(--app-text-muted) 65%, transparent);
+  --el-border-color: var(--app-border);
+  --el-border-color-light: var(--app-border);
+  --el-border-color-lighter: var(--app-border);
+  --el-border-color-extra-light: var(--app-border);
+  --el-border-color-dark: color-mix(in srgb, var(--app-surface) 85%, var(--app-text));
+  --el-border-color-darker: color-mix(in srgb, var(--app-surface) 75%, var(--app-text));
+  --el-bg-color: var(--app-surface);
+  --el-bg-color-page: var(--app-bg);
+  --el-bg-color-overlay: var(--app-surface);
+  --el-fill-color-light: var(--app-surface-soft);
+  --el-fill-color-lighter: var(--app-surface-soft);
+  --el-fill-color-extra-light: var(--app-surface-soft);
+  --el-fill-color-blank: var(--app-surface);
+  --el-fill-color: color-mix(in srgb, var(--app-surface) 94%, var(--app-text));
+  --el-fill-color-dark: color-mix(in srgb, var(--app-surface) 90%, var(--app-text));
+  --el-fill-color-darker: color-mix(in srgb, var(--app-surface) 85%, var(--app-text));
+  --el-box-shadow-light: var(--app-shadow-hover);
+}
+
+body {
+  color: var(--app-text);
+  background: var(--app-bg);
+}
+
+::selection {
+  color: var(--el-color-primary);
+  background: var(--app-primary-soft);
+}
+
+:focus-visible {
+  outline: 2px solid var(--el-color-primary);
+  outline-offset: 3px;
+}
+
+.el-card {
+  overflow: hidden;
+  line-height: 1.6;
+  border: 0;
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+
+  --el-card-padding: 24px;
+  --el-card-bg-color: var(--app-surface);
+
+  &.is-always-shadow,
+  &.is-hover-shadow:hover {
+    box-shadow: var(--app-shadow);
+  }
+}
+
+.el-button {
+  font-weight: 400;
+}
+
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select__wrapper {
+  background: var(--app-surface);
+}
+
+.el-drawer {
+  --el-drawer-padding-primary: 24px;
+
+  .el-drawer__header {
+    padding-bottom: 20px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--app-border);
+  }
+}
+
+.el-popper.is-light {
+  border-color: var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow-hover);
+}
+
+.el-menu--popup {
+  min-width: 180px;
+  padding: 6px;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+
+  .el-menu-item,
+  .el-sub-menu__title {
+    height: 40px;
+    color: var(--app-text-secondary);
+    border-radius: 6px;
+
+    &:hover {
+      background: var(--app-surface-soft);
+    }
+
+    &.is-active {
+      color: var(--el-color-primary);
+      background: var(--app-primary-soft);
+    }
+  }
+}
+
+html:has(.layout-menu:not(.layout-min-menu)) .collapsed-navigation-popup {
+  display: none;
+}
+
+@media (width < 640px) {
+  .collapsed-navigation-popup {
+    display: none;
+  }
+
+  .el-message-box {
+    max-width: calc(100vw - 32px);
+  }
+
+  .el-drawer {
+    max-width: calc(100vw - env(safe-area-inset-left));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

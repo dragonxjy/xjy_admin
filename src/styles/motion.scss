@@ -1,0 +1,87 @@
+// Interpolate shared theme colors once; descendants consume the same frame.
+@each $token, $initial in (
+  "bg": #f7fafc,
+  "surface": #fff,
+  "surface-soft": #f3f3f5,
+  "text": #1f1f1f,
+  "text-secondary": #333639,
+  "text-muted": #767c82,
+  "border": #efeff5,
+  "primary-soft": #eff0ff,
+  "primary": #646cff,
+  "success": #52c41a,
+  "warning": #faad14,
+  "danger": #f5222d,
+  "info": #64748b
+) {
+  @property --app-#{$token} {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #{$initial};
+  }
+}
+
+:root {
+  --app-motion-duration: 300ms;
+  --app-sidebar-duration: var(--app-motion-duration);
+  --app-sidebar-easing: ease-in-out;
+  --app-motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --app-z-header: 20;
+  --app-z-tabs: 10;
+  --app-z-sidebar: 30;
+  --app-z-mobile-navigation: 100;
+  --app-z-settings: 4000;
+  --el-transition-duration: var(--app-motion-duration);
+  --el-transition-duration-fast: var(--app-motion-duration);
+  --el-transition-function-ease-in-out-bezier: var(--app-motion-easing);
+  --el-transition-function-fast-bezier: var(--app-motion-easing);
+  --el-transition-all: opacity var(--app-motion-duration) var(--app-motion-easing), transform var(--app-motion-duration) var(--app-motion-easing);
+  --el-transition-color: none;
+  --el-transition-border: none;
+  --el-transition-box-shadow: none;
+  --animate-duration: var(--app-motion-duration);
+
+  transition: --app-bg var(--app-motion-duration) var(--app-motion-easing),
+    --app-surface var(--app-motion-duration) var(--app-motion-easing),
+    --app-surface-soft var(--app-motion-duration) var(--app-motion-easing),
+    --app-text var(--app-motion-duration) var(--app-motion-easing),
+    --app-text-secondary var(--app-motion-duration) var(--app-motion-easing),
+    --app-text-muted var(--app-motion-duration) var(--app-motion-easing),
+    --app-border var(--app-motion-duration) var(--app-motion-easing),
+    --app-primary-soft var(--app-motion-duration) var(--app-motion-easing),
+    --app-primary var(--app-motion-duration) var(--app-motion-easing),
+    --app-success var(--app-motion-duration) var(--app-motion-easing),
+    --app-warning var(--app-motion-duration) var(--app-motion-easing),
+    --app-danger var(--app-motion-duration) var(--app-motion-easing),
+    --app-info var(--app-motion-duration) var(--app-motion-easing);
+}
+
+// These components otherwise animate a second time after the root color changes.
+.el-card,
+.el-button,
+.el-menu-item,
+.el-sub-menu__title,
+.el-breadcrumb__inner,
+.el-breadcrumb__separator,
+.el-switch__core,
+.el-checkbox__inner,
+.el-radio__inner {
+  transition: none;
+}
+
+.el-drawer {
+  transition: transform var(--app-motion-duration) var(--app-motion-easing);
+}
+
+.el-switch__action {
+  transition: left var(--app-motion-duration) var(--app-motion-easing), transform var(--app-motion-duration) var(--app-motion-easing);
+}
+
+.animate__animated.animate__fast,
+.animate__animated.animate__faster {
+  animation-duration: var(--app-motion-duration);
+}
+
+.settings-overlay {
+  z-index: var(--app-z-settings) !important;
+}

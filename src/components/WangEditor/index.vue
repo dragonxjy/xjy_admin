@@ -64,25 +64,35 @@ const handleCreated = (editor: any) => {
 
 <style scoped lang="scss">
 .wang_edit {
-  border: 1px var(--el-border-color-dark) solid;
-  border-radius: 5px;
-  &.dark {
-    --w-e-textarea-bg-color: #333;
-    --w-e-toolbar-bg-color: #333;
-    --w-e-toolbar-color: gray;
-    --w-e-textarea-color: #fff;
-  }
+  overflow: hidden;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+
+  --w-e-textarea-bg-color: var(--app-surface);
+  --w-e-textarea-color: var(--app-text);
+  --w-e-toolbar-bg-color: var(--app-surface);
+  --w-e-toolbar-color: var(--app-text-secondary);
+  --w-e-toolbar-border-color: var(--app-border);
+  --w-e-toolbar-active-color: var(--el-color-primary);
+  --w-e-toolbar-active-bg-color: var(--app-primary-soft);
+  --w-e-toolbar-disabled-color: var(--app-text-muted);
+  --w-e-modal-button-bg-color: var(--app-surface-soft);
+  --w-e-modal-button-border-color: var(--app-border);
+  --w-e-textarea-border-color: var(--app-border);
+  --w-e-textarea-slight-bg-color: var(--app-surface-soft);
+  --w-e-textarea-slight-color: var(--app-text-secondary);
+  --w-e-textarea-selected-border-color: var(--el-color-primary);
 
   #toolbar-container {
-    border-bottom: 1px solid var(--el-border-color-dark);
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-bottom: 1px solid var(--app-border);
   }
+
   #editor-container {
     height: v-bind("props.height") !important;
+    min-height: 320px;
     overflow: hidden;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
   }
 }
 </style>

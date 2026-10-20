@@ -1,6 +1,6 @@
 <template>
   <div class="canvas_dome">
-    <el-row gutter="50">
+    <el-row :gutter="24">
       <el-col :xs="24" :sm="24" :md="24" :lg="11">
         <canvas ref="canvas"></canvas>
       </el-col>
@@ -180,102 +180,95 @@ const outPic = () => {
 <style scoped lang="scss">
 .canvas_dome {
   width: 100%;
-  height: 100%;
-  padding: 10px;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  .el-row {
+    row-gap: var(--app-gap);
+  }
 
   canvas {
+    display: block;
     width: 100%;
-    height: 98%;
+    height: auto;
+    border-radius: var(--app-radius);
+    box-shadow: var(--app-shadow);
   }
+
   .select_canvas {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
     height: 100%;
-    border: 1px gray solid;
-    border-radius: 5px;
-    padding: 5px;
-    .select_img {
-      cursor: pointer;
-      margin-top: 10px;
-      .tit {
-        font-size: 15px;
-        padding-bottom: 10px;
-        font-weight: bold;
-        color: gray;
-        border-bottom: 1px var(--el-border-color-dark) solid;
-      }
-      .picList {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        img {
-          width: 120px;
-          margin: 5px;
-          border-radius: 10px;
-          height: 120px;
-          &.activeImg {
-            // border: 2px var(--el-border-color-dark) solid;
-            filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
-          }
-        }
-      }
-    }
-    .select_color {
-      height: 20%;
-      cursor: pointer;
-      margin-top: 60px;
-      .tit {
-        font-size: 15px;
-        font-weight: bold;
-        padding-bottom: 10px;
-        color: gray;
-        border-bottom: 1px var(--el-border-color-dark) solid;
-      }
-      .colorList {
-        display: flex;
-        align-items: center;
-        padding: 5px;
-        .colorItem {
-          margin: 0px 5px;
-          width: 50px;
-          height: 50px;
-          display: flex;
-          border-radius: 50%;
-          &.activeColorItem {
-            border: 2px var(--el-border-color-dark) solid;
-          }
-          .color {
-            width: 38px;
-            margin: auto;
-            height: 38px;
-            border-radius: 50%;
-          }
-        }
-      }
-    }
-    .selece_input {
-      cursor: pointer;
-      margin-top: 50px;
-      .tit {
-        font-size: 15px;
-        font-weight: bold;
-        padding-bottom: 10px;
-        color: gray;
-        border-bottom: 1px var(--el-border-color-dark) solid;
-      }
-      .el-input {
-        width: 95%;
-        margin: 10px;
-      }
-    }
-    .btn {
+    padding: 24px;
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius);
+    box-shadow: var(--app-shadow);
+  }
+
+  .tit {
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--app-text);
+    border-bottom: 1px solid var(--app-border);
+  }
+
+  .picList {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+
+    img {
       width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 20px;
-      margin-bottom: 50px;
-      padding-right: 30px;
+      aspect-ratio: 1;
+      padding: 4px;
+      cursor: pointer;
+      object-fit: cover;
+      border: 2px solid transparent;
+      border-radius: var(--app-radius);
+
+      &:hover,
+      &.activeImg {
+        border-color: var(--el-color-primary);
+      }
     }
+  }
+
+  .colorList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    .colorItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 50%;
+
+      &:hover,
+      &.activeColorItem {
+        border-color: var(--el-color-primary);
+      }
+    }
+
+    .color {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+    }
+  }
+
+  .btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
   }
 }
 </style>

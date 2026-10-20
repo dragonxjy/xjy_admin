@@ -1,11 +1,12 @@
 <template>
   <div
-    class="layout_logo animate__animated animate__fadeIn animate__fast"
+    class="layout_logo"
+    :class="{ 'logo-collapsed': settingStore.flag }"
     v-show="settingStore.page_setting.isShow_Logo"
     @click="pushHome"
   >
-    <img :src="basic.logo" alt="" />
-    <view class="title" v-show="!settingStore.flag">{{ basic.title }}</view>
+    <span class="logo-mark"><img :src="basic.logo" alt="" /></span>
+    <span class="title">{{ basic.title }}</span>
   </div>
 </template>
 
@@ -25,22 +26,42 @@ const pushHome = () => {
 <style scoped lang="scss">
 .layout_logo {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
-  justify-content: center;
+  width: 100%;
   height: $layout-Logo-height;
-  border-bottom: 1px solid #302f2f;
+  overflow: hidden;
+  cursor: pointer;
+
+  .logo-mark {
+    display: flex;
+    flex: 0 0 var(--app-sidebar-collapsed-width);
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
   img {
     width: $layout-logo_width;
     height: $layout-logo_height;
+    object-fit: contain;
   }
+
   .title {
-    font-size: $layout-title_size;
-    font-weight: bold;
-    color: $layout-title_color;
+    min-width: 0;
+    padding-right: 16px;
     overflow: hidden;
-    white-space: nowrap;
-    margin-left: 5px;
+    font-size: $layout-title_size;
+    font-weight: 600;
+    color: var(--el-color-primary);
     text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: opacity var(--app-sidebar-duration) var(--app-sidebar-easing), visibility var(--app-sidebar-duration) var(--app-sidebar-easing);
+  }
+
+  &.logo-collapsed .title {
+    visibility: hidden;
+    opacity: 0;
   }
 }
 </style>

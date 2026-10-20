@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
         },
         vueTemplate: true, // default false
         resolvers: [
-          ElementPlusResolver(), // 自动导入图标组件
+          ElementPlusResolver({ importStyle: false }),
         ],
       }),
       vue(),
@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
       }),
       // 主题定制
       Components({
-        resolvers: [ElementPlusResolver({ importStyle: "sass" })],
+        resolvers: [ElementPlusResolver({ importStyle: false })],
         // 指定自定义组件位置(默认:src/components)自动注册全局组件
         dirs: [
           "src/components/",
@@ -62,12 +62,9 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          javascriptEnabled: true,
+          quietDeps: true,
           // 自动导入定制化样式文件进行样式覆盖
-          additionalData: `  
-          @use "@/styles/element/index.scss" as *;
-           @use "@/config/public.scss" as *;
-          `,
+          additionalData: `@use "@/styles/element/index.scss" as *;\n@use "@/config/public.scss" as *;\n`,
         },
       },
     },

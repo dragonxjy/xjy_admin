@@ -1,5 +1,5 @@
 <template>
-  <el-row justify="space-between" align="center" gutter="20" class="pagination">
+  <el-row justify="space-between" align="middle" :gutter="24" class="pagination">
     <el-col :xs="24" :sm="24" :md="24" :lg="16">
       <div class="view">
         <!-- 封装分页器 -->
@@ -58,7 +58,7 @@ import { message } from "@/Hooks/element"
 import type {
   paginationConfigType,
   paginationParamsType,
-} from "../../../components/ElementPlus_components/El-pagination/type"
+} from "@/components/Elpagination/type"
 
 const config = reactive(<paginationConfigType>{
   background: true,
@@ -83,44 +83,61 @@ const pageSizeChange = (val: number) => {
 </script>
 
 <style scoped lang="scss">
-:deep(.el-input .el-input__wrapper) {
-  height: 35px;
-  background-color: transparent !important;
-}
-:deep(.el-input__inner) {
-  color: var(--el-text-color-primary) !important;
-}
 .pagination {
-  width: 100%;
-  height: 100%;
+  row-gap: var(--app-gap);
+  width: auto;
+  min-height: 100%;
 
   .view {
-    width: 100%;
-    height: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 420px;
+    padding: 24px;
+    overflow: auto;
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius);
+    box-shadow: var(--app-shadow);
   }
 
   .content {
-    width: 100%;
-    height: 80%;
-    .card-header {
-      padding-bottom: 20px;
-      border-bottom: 1px gray solid;
-    }
-    .base_config {
-      width: 100%;
-      margin-top: 30px;
+    min-height: 420px;
+  }
 
-      .base_item {
-        width: 100%;
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
+  .card-header {
+    padding-bottom: 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--app-text);
+    border-bottom: 1px solid var(--app-border);
+  }
+
+  .base_config {
+    margin-top: 12px;
+  }
+
+  .base_item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 58px;
+    font-size: 13px;
+    color: var(--app-text-secondary);
+    border-bottom: 1px solid var(--app-border);
+
+    &:last-child {
+      border-bottom: 0;
     }
+  }
+}
+
+@media (width <= 767px) {
+  .pagination .view {
+    justify-content: flex-start;
+    min-height: 180px;
+    padding: 16px;
   }
 }
 </style>

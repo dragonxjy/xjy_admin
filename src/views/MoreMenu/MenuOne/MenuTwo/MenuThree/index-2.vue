@@ -6,11 +6,17 @@
 
 <style scoped lang="scss">
 .three {
-  width: 90%;
-  height: 300px;
-  padding: 10px;
-  background-color: #f6c58a;
-  border-radius: 10px;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 200px;
+  padding: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--app-text);
+  background: var(--app-primary-soft);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
 }
 </style>

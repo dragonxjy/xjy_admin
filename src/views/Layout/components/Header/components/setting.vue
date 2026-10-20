@@ -1,80 +1,41 @@
 <template>
-  <view class="setting">
-    <!-- 刷新 -->
-    <div class="refresh" @click="refresh" v-if="defaultSettings.isShowMenu">
-      <div ref="refreshRef" class="refreshContent">
-        <el-icon size="16" color="gray"><Refresh /></el-icon>
-      </div>
-    </div>
-
-    <!-- 全屏 -->
-    <div
-      class="full_Screen"
-      @click="toggle"
-      v-show="defaultSettings.isFullScreen"
-    >
-      <img
-        src="../../../../../assets/config/fullScreen.svg"
-        v-show="!isFullscreen"
-      />
-      <img
-        src="../../../../../assets/config/nofullScreen.svg"
-        v-show="isFullscreen"
-      />
-    </div>
-
-    <!-- 主题切换（黑白切换） -->
-    <div class="topic" @click="toggleDark">
-      <img
-        src="../../../../../assets/config/blackSky.svg"
-        class="animate__animated animate__fadeInDown animate__faster"
-        v-show="settingStore.dark"
-      />
-      <img
-        src="../../../../../assets/config/dayTime.svg"
-        class="animate__animated animate__fadeInDown animate__faster"
-        v-show="!settingStore.dark"
-      />
-    </div>
-    <!-- 用户 -->
+  <div class="setting">
+    <button class="refresh" type="button" aria-label="刷新当前页面" title="刷新当前页面" @click="refresh" v-if="defaultSettings.isShowMenu">
+      <div ref="refreshRef" class="refreshContent"><el-icon :size="20"><Refresh /></el-icon></div>
+    </button>
+    <button class="tab-full-screen" type="button" aria-label="全屏预览" title="全屏预览" @click="toggle" v-show="defaultSettings.isFullScreen">
+      <img src="../../../../../assets/config/fullScreen.svg" alt="" v-show="!isFullscreen" />
+      <img src="../../../../../assets/config/nofullScreen.svg" alt="" v-show="isFullscreen" />
+    </button>
+    <button class="full_Screen" type="button" aria-label="切换全屏" title="切换全屏" @click="toggle" v-show="defaultSettings.isFullScreen">
+      <img src="../../../../../assets/config/fullScreen.svg" alt="" v-show="!isFullscreen" />
+      <img src="../../../../../assets/config/nofullScreen.svg" alt="" v-show="isFullscreen" />
+    </button>
+    <button class="topic" type="button" aria-label="切换亮色或暗色主题" title="主题模式" @click="toggleDark">
+      <img src="../../../../../assets/config/dayTime.svg" alt="" v-show="!settingStore.dark" />
+      <img src="../../../../../assets/config/blackSky.svg" alt="" v-show="settingStore.dark" />
+    </button>
+    <button class="set" type="button" aria-label="主题配置" title="主题配置" @click="set" v-show="defaultSettings.isSet">
+      <el-icon :size="20"><Setting /></el-icon>
+    </button>
     <div class="setting-user">
       <el-dropdown trigger="click">
-        <div class="user">
-          <el-avatar
-            :size="35"
-            :src="userStore.userinfo.avatar"
-            @error="() => true"
-          >
-            <img
-              src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"
-            />
+        <button class="user" type="button" aria-label="用户菜单">
+          <el-avatar :size="24" :src="userStore.userinfo.avatar" @error="() => true">
+            <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" alt="" />
           </el-avatar>
-          <div class="nickname">{{ userStore.userinfo.username }}</div>
-        </div>
+          <span class="nickname">{{ userStore.userinfo.username }}</span>
+        </button>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="goUrl">项目地址</el-dropdown-item>
-          </el-dropdown-menu>
-          <el-dropdown-menu>
-            <el-dropdown-item @click="loginOut">退出登录</el-dropdown-item>
+            <el-dropdown-item @click="goUrl"><el-icon><Link /></el-icon>项目地址</el-dropdown-item>
+            <el-dropdown-item @click="loginOut"><el-icon><SwitchButton /></el-icon>退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
     </div>
-    <!-- 设置 -->
-    <el-tooltip
-      class="box-item"
-      effect="dark"
-      content="设置"
-      placement="bottom"
-    >
-      <div class="set" @click="set" v-show="defaultSettings.isSet">
-        <el-icon size="16" color="gray"><Setting /></el-icon>
-      </div>
-    </el-tooltip>
-    <!-- 设置 -->
     <Drawer v-model="drawerShow" />
-  </view>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -125,88 +86,92 @@ const set = () => {
 
 <style scoped lang="scss">
 .setting {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   height: $layout-header_height;
+
+  button {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 36px;
+    padding: 0;
+    color: var(--app-text-secondary);
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-radius: 3px;
+
+    &:hover {
+      background: var(--app-surface-soft);
+    }
+  }
+
+  .refresh,
+  .tab-full-screen {
+    position: fixed;
+    top: 60px;
+    z-index: 25;
+  }
+
   .refresh {
-    height: 100%;
-    padding: 0px 15px 0px 15px;
+    right: 56px;
+  }
+
+  .tab-full-screen {
+    right: 12px;
+  }
+
+  .topic > img,
+  .full_Screen > img,
+  .tab-full-screen > img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .refreshContent {
     display: flex;
     align-items: center;
     justify-content: center;
-    .refreshContent {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    &:hover {
-      background: $layout-header_hoverbgColor;
-    }
   }
-  .full_Screen {
-    height: 100%;
-    padding: 0px 15px 0px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s;
-    img {
-      width: 15px;
-      height: 15px;
-    }
-    &:hover {
-      background-color: $layout-header_hoverbgColor;
-    }
-  }
-  .topic {
-    height: 100%;
-    padding: 0px 15px 0px 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s;
-    img {
-      width: 20px;
-      height: 20px;
-    }
-    &:hover {
-      background-color: $layout-header_hoverbgColor;
-    }
-  }
+
   .setting-user {
-    height: 100%;
-    padding: 0px 10px 0px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s;
-    .user {
-      display: flex;
-      align-items: center;
-      .nickname {
-        margin-left: 10px;
-        font-size: 14px;
-      }
+    cursor: pointer;
+  }
+
+  .user {
+    gap: 8px;
+    width: auto;
+    padding: 0 12px;
+
+    .el-avatar {
+      flex-shrink: 0;
     }
-    &:hover {
-      background: $layout-header_hoverbgColor;
-      .nickname {
-        color: black;
-      }
+
+    .nickname {
+      max-width: 110px;
+      overflow: hidden;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      color: var(--app-text);
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
-  .set {
-    height: 100%;
-    padding: 0px 20px 0px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s;
-    position: relative;
-    &:hover {
-      background-color: $layout-header_hoverbgColor;
+}
+
+@media (width < 640px) {
+  .setting {
+    .full_Screen {
+      display: none;
+    }
+
+    .user .nickname {
+      max-width: 72px;
     }
   }
 }

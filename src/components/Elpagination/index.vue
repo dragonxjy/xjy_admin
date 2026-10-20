@@ -4,7 +4,7 @@
     v-model:page-size="paginationParams.pageSize"
     :background="config.background"
     :disabled="config.disabled"
-    :small="config.small"
+    :size="config.small ? 'small' : 'default'"
     :layout="config.layout"
     :total="paginationParams.total"
     :page-sizes="config.page_sizes"

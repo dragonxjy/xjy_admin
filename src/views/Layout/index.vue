@@ -1,6 +1,7 @@
 <template>
   <div class="layout">
     <div
+      id="main-navigation"
       class="layout-menu"
       :class="{
         'layout-min-menu': flag,
@@ -10,19 +11,37 @@
       <!-- 标题与logo -->
       <MenuLogo />
       <el-menu
+        class="desktop-menu"
+        popper-class="collapsed-navigation-popup"
         router
         :default-active="$route.path"
         :collapse="flag"
-        :background-color="
-          dark
-            ? variables['menu-background-dark']
-            : variables['menu-background']
-        "
-        text-color="#fff"
+        :collapse-transition="true"
         :active-text-color="variables['menu-active-text']"
       >
         <MenuItem :menuRouteList="routerMenuList" />
       </el-menu>
+    </div>
+    <div class="mobile-navigation" :class="{ 'is-open': flag }">
+      <button
+        type="button"
+        class="mobile-menu-mask"
+        aria-label="关闭导航菜单"
+        :tabindex="flag ? 0 : -1"
+        @click="settingStore.changeFlag"
+      ></button>
+      <aside id="mobile-main-navigation" class="mobile-menu-panel" :inert="!flag" aria-label="主导航">
+        <MenuLogo />
+        <el-menu
+          router
+          :default-active="$route.path"
+          :collapse="false"
+          :active-text-color="variables['menu-active-text']"
+          @select="settingStore.changeFlag"
+        >
+          <MenuItem :menuRouteList="routerMenuList" />
+        </el-menu>
+      </aside>
     </div>
     <!-- 主体 -->
     <div
@@ -38,24 +57,19 @@
       <!-- 导航栏 -->
       <TagViews />
       <!-- 主体部分 -->
-      <div
-        class="main-content"
-        :style="{
-          backgroundColor: dark ? '#1D1E1F' : '#fff',
-          transition: 'all 0.2s',
-        }"
-      >
-        <transition
-          :enter-active-class="`animate__animated ${defaultSettings.routerAnimateInType} animate__faster`"
-          mode="out-in"
-        >
-          <router-view v-if="isflag" v-slot="{ Component }">
+      <div class="main-content">
+        <router-view v-if="isflag" v-slot="{ Component }">
+          <transition
+            :enter-active-class="`animate__animated ${defaultSettings.routerAnimateInType} animate__faster`"
+            mode="out-in"
+          >
             <keep-alive>
               <component :is="Component" :key="$route.path" />
             </keep-alive>
-          </router-view>
-        </transition>
+          </transition>
+        </router-view>
       </div>
+      <footer class="layout-footer">Copyright © xjy_admin</footer>
     </div>
   </div>
 </template>
@@ -86,5 +100,5 @@ watch(
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 </style>

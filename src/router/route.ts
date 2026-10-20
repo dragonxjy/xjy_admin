@@ -1,8 +1,10 @@
 /***
  * @常量路由
  */
+import type { RouteRecordRaw } from "vue-router"
+
 export const Layout = () => import("@/views/Layout/index.vue")
-export const constRouter = [
+export const constRouter: RouteRecordRaw[] = [
   {
     path: "/login",
     meta: { title: "登录", icon: "", isShow: false },
@@ -46,9 +48,10 @@ export const constRouter = [
 /****
  * @异步路由也叫权限路由
  */
-export const asyncRouter = [
+export const asyncRouter: RouteRecordRaw[] = [
   {
     path: "/",
+    name: "canvas-layout",
     redirect: "/canvas",
     meta: { title: "", icon: "", isShow: false },
     component: Layout,
@@ -139,7 +142,7 @@ export const asyncRouter = [
 /***
  * @任意路由
  */
-export const anyRouter = [
+export const anyRouter: RouteRecordRaw[] = [
   //任意路由
   {
     path: "/:pathMatch(.*)*",

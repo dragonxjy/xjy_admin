@@ -145,6 +145,6 @@ nextTick(() => {
 
 <style scoped>
 .box {
-  color: rgba(8, 171, 231, 0.8);
+  color: rgb(8 171 231 / 80%);
 }
 </style>

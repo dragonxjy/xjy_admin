@@ -2,10 +2,6 @@
   <div
     v-show="settingStore.page_setting.isShow_Tagview"
     class="tagView"
-    :style="{
-      backgroundColor: isDark ? '#1D1E1F' : 'white',
-      transition: 'all 0.2s',
-    }"
   >
     <el-scrollbar>
       <div class="tags animate__animated animate__fadeInDown animate__faster">
@@ -16,8 +12,12 @@
             @click="changeTag(item)"
             :class="{ tagItem: true, activeTag: route.path === item.path }"
           >
+            <ChromeTabBackground />
             <div class="tagContent">
-              <div class="dot" v-show="route.path === item.path"></div>
+              <el-icon>
+                <HomeFilled v-if="item.path === '/home'" />
+                <Document v-else />
+              </el-icon>
               <text>{{ item.title }}</text>
             </div>
           </el-tag>
@@ -91,54 +91,107 @@ const closeTag = (i: number, path: string) => {
 
 <style scoped lang="scss">
 .tagView {
-  border-bottom: 1px var(--el-border-color-dark) solid;
+  z-index: var(--app-z-tabs);
+  flex-shrink: 0;
+  height: 44px;
+  padding: 0 108px 0 16px;
+  background: var(--app-surface) !important;
+  box-shadow: 0 1px 2px rgb(0 21 41 / 8%);
+
+  :deep(.el-scrollbar__view) {
+    height: 44px;
+  }
+
   .tags {
     display: flex;
+    align-items: flex-end;
+    width: max-content;
+    min-width: 100%;
+    height: 44px;
+    padding-right: 18px;
   }
+
   .tagItem {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
     flex-shrink: 0;
-    display: flex;
-    margin: 5px;
     align-items: center;
-    justify-content: space-between;
-    padding: 5px 10px 5px 10px;
-    border: 1px var(--el-color-primary) solid;
-    color: var(--el-color-primary);
-    font-size: 10px;
-    border-radius: 3px;
-    .tagContent {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      .dot {
-        width: 6px;
-        height: 6px;
-        background-color: #fff;
-        border-radius: 50%;
-        margin-right: 5px;
-      }
+    height: 34px;
+    padding: 6px 24px;
+    margin-right: -18px;
+    overflow: visible;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--app-text-secondary);
+    cursor: pointer;
+    background: transparent;
+    isolation: isolate;
+    border: 0;
+    border-radius: 0;
+
+    &::after {
+      position: absolute;
+      top: 9px;
+      right: 7px;
+      width: 1px;
+      height: 16px;
+      content: "";
+      background: var(--app-border);
+    }
+
+    :deep(.chrome-tab-background) {
+      color: transparent;
     }
 
     &:hover {
-      cursor: pointer;
-    }
-    &.activeTag {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 5px 10px 5px 10px;
-      font-size: 10px;
-      margin: 5px;
-      text-align: center;
-      color: #fff !important;
-      background: var(--el-color-primary);
-      :deep(.el-tag__close) {
-        color: #fff;
+      z-index: 9;
+
+      :deep(.chrome-tab-background) {
+        color: var(--app-surface-soft);
       }
-      :deep(.el-tag__close):hover {
-        background-color: #fff;
-        color: var(--el-color-primary);
+    }
+
+    .tagContent {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      .el-icon {
+        font-size: 16px;
+      }
+
+      text {
+        max-width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    &.activeTag {
+      z-index: var(--app-z-tabs);
+      color: var(--el-color-primary);
+
+      :deep(.chrome-tab-background) {
+        color: var(--app-primary-soft);
+      }
+    }
+
+    &.activeTag::after,
+    &:hover::after {
+      opacity: 0;
+    }
+
+    :deep(.el-tag__close) {
+      width: 16px;
+      height: 16px;
+      margin-left: 16px;
+      color: inherit;
+
+      &:hover {
+        color: var(--app-surface);
+        background: var(--el-color-primary);
       }
     }
   }

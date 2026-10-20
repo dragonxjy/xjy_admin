@@ -1,6 +1,6 @@
 <template>
   <!-- 设置 -->
-  <el-drawer :show-close="false" size="300">
+  <el-drawer :show-close="false" size="300" append-to-body modal-class="settings-overlay">
     <template #header>
       <div
         :class="{ blackTitle: settingStore.dark, title: !settingStore.dark }"
@@ -79,131 +79,79 @@ const settingStore = useSettingStore()
 </script>
 
 <style scoped lang="scss">
-.title {
-  color: black;
-  font-size: 15px;
-}
+.title,
 .blackTitle {
-  color: #fff;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--app-text);
 }
+
 .config {
-  .tip {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    &::before {
-      content: "";
-      position: absolute;
-      left: 20px;
-      height: 1px;
-      background-color: #e0e0e0;
-      width: 80px;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      right: 20px;
-      height: 1px;
-      background-color: #e0e0e0;
-      width: 80px;
-    }
-  }
+  .tip,
   .blackTip {
     display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 8px 0 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--app-text-secondary);
+
+    &::before,
+    &::after {
+      flex: 1;
+      height: 1px;
+      content: "";
+      background: var(--app-border);
+    }
+  }
+
+  .changeTopic {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  .topicChange {
+    display: flex;
+    gap: 4px;
+    width: 180px;
+    padding: 4px;
+    background: var(--app-surface-soft);
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius);
+  }
+
+  .topicItemLight,
+  .topicItemDark {
+    display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
-    position: relative;
-    &::before {
-      content: "";
-      position: absolute;
-      left: 20px;
-      height: 1px;
-      background-color: #5f5f5f;
-      width: 80px;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      right: 20px;
-      height: 1px;
-      background-color: #5f5f5f;
-      width: 80px;
+    height: 34px;
+    cursor: pointer;
+    border-radius: 6px;
+
+    img {
+      width: 20px;
+      height: 20px;
     }
   }
-  .topic {
-    width: 100%;
 
-    .changeTopic {
-      width: 100%;
-      display: flex;
-
-      .topicChange {
-        margin: 20px auto;
-        width: 60%;
-        position: relative;
-        height: 40px;
-        border-radius: 5px;
-        background-color: #efefef;
-        &.darkBg {
-          background-color: #424247;
-        }
-        .topicItemLight {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 5px;
-          width: 47%;
-          height: 82%;
-          position: absolute;
-          left: 3px;
-          top: 4px;
-          img {
-            width: 20px;
-            height: 20px;
-          }
-          &.avtiveTopicItemLight {
-            background-color: #fff;
-            box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
-          }
-        }
-        .topicItemDark {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 5px;
-          width: 47%;
-          height: 82%;
-          position: absolute;
-          right: 3px;
-          top: 4px;
-          img {
-            width: 20px;
-            height: 20px;
-          }
-          &.avtiveTopicItemDark {
-            background-color: #55555a;
-            box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
-          }
-        }
-      }
-    }
+  .avtiveTopicItemLight,
+  .avtiveTopicItemDark {
+    background: var(--app-surface);
+    box-shadow: var(--app-shadow);
   }
-  .set {
-    width: 90%;
-    margin: 15px auto;
+
+  .set_item {
     display: flex;
-    flex-direction: column;
-    .set_item {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      text {
-        font-size: 10px;
-      }
-    }
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    font-size: 13px;
+    color: var(--app-text-secondary);
+    border-bottom: 1px solid var(--app-border);
   }
 }
 </style>

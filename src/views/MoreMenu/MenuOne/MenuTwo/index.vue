@@ -9,14 +9,20 @@
 
 <style scoped lang="scss">
 .twoMenu {
-  width: 90%;
-  height: 500px;
-  padding: 10px;
-  background-color: #e7d8f8;
-  border-radius: 10px;
-  margin: 0 auto;
+  width: 100%;
+  min-height: 320px;
+  padding: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--app-text);
+  background: var(--app-surface-soft);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+
   .two {
-    margin-bottom: 30px;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--app-border);
   }
 }
 </style>

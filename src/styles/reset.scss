@@ -1,24 +1,31 @@
-// 重置样式
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   height: 100%;
   font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  /* stylelint-disable-next-line property-no-vendor-prefix -- iOS Safari uses the prefixed property. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  text-rendering: optimizelegibility;
 }
-body {
-  height: 100%;
-  color: #333;
-  min-width: 260px;
 
-  font: 1em/1.4 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI',
-    'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei',
-    sans-serif;
+body {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+  font: 14px/1.5 var(--el-font-family);
 }
+
 body,
 ul,
+ol,
 h1,
+h2,
 h3,
 h4,
 p,
@@ -27,54 +34,70 @@ dd {
   padding: 0;
   margin: 0;
 }
+
 a {
+  color: inherit;
   text-decoration: none;
-  color: #333;
-  outline: none;
 }
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
 i {
   font-style: normal;
 }
-input[type='text'],
-input[type='search'],
-input[type='password'],
-input[type='checkbox'] {
-  padding: 0;
-  outline: none;
-  border: none;
-  -webkit-appearance: none;
-  &::placeholder {
-    color: #ccc;
-  }
-}
+
 ul {
   list-style: none;
 }
 
 #app {
-  max-width: 100%;
-  background: #fff;
-  user-select: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+* {
+  scrollbar-color: var(--app-text-muted) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--app-text-muted);
+  border-radius: 6px;
 }
 
 .container {
-  width: 1500px;
-  margin: 0 auto;
   position: relative;
+  width: min(100%, 1500px);
+  margin: 0 auto;
 }
+
 .ellipsis {
-  white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ellipsis-2 {
-  word-break: break-all;
-  text-overflow: ellipsis;
   display: -webkit-box;
+  overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  overflow: hidden;
+  word-break: break-all;
 }
 
 .fl {
@@ -85,16 +108,12 @@ ul {
   float: right;
 }
 
-.clearfix:after {
-  content: '.';
+.clearfix::after {
   display: block;
-  visibility: hidden;
-  height: 0;
-  line-height: 0;
   clear: both;
+  content: "";
 }
 
-// reset element
 .el-breadcrumb__inner.is-link {
-  font-weight: 400 !important;
+  font-weight: 400;
 }

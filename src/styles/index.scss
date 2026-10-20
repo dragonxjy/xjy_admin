@@ -1,6 +1,5 @@
-@import './reset.scss';
-@import 'animate.css';
-@import 'element-plus/dist/index.css';
-
-// @import './element/dark.scss';
-// @import './element/index.scss';
+@use "element-plus/theme-chalk/src/index";
+@use "animate.css/animate.css";
+@use "./reset";
+@use "./motion";
+@use "./theme";

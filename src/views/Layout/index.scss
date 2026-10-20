@@ -1,98 +1,270 @@
-// :deep(.el-menu-item-group__title) {
-//     background-color:$layout-slider_bgColor ;
-// }
-// :deep(.el-menu-item) {
-//     background-color:$layout-slider_bgColor ;
-// }
-// :deep(.el-menu-item):hover {
-//     background-color: #19AA8D;
-// }
+@use "../../config/public" as *;
 
 .layout {
-    width: 100%;
-    height: 100vh;
-    position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  color: var(--app-text);
+  background: var(--app-bg);
 
+  .layout-menu,
+  .mobile-menu-panel {
+    display: flex;
+    flex-direction: column;
+    width: var(--app-sidebar-width);
+    background: var(--app-surface);
+    box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
 
+    > .el-menu {
+      flex: 1;
+      min-height: 0;
+      padding: 2px 0 8px;
+      overflow: hidden auto;
+      background: transparent;
+      border-right: 0;
+
+      --el-menu-base-level-padding: 14px;
+      --el-menu-level-padding: 18px;
+      --el-menu-item-height: 42px;
+      --el-menu-sub-item-height: 42px;
+      --el-menu-icon-width: 20px;
+    }
+
+    :deep(.el-menu) {
+      background: transparent;
+      border-right: 0;
+    }
+
+    // Keep row margins from collapsing when the native transition changes overflow.
+    :deep(.el-sub-menu) {
+      display: flow-root;
+      margin: 4px 0;
+    }
+
+    :deep(.el-menu--inline) {
+      display: flow-root;
+
+      > :last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    :deep(.el-menu-item),
+    :deep(.el-sub-menu__title) {
+      height: 42px;
+      margin: 4px 8px;
+      overflow: hidden;
+      line-height: 42px;
+      color: var(--app-text-secondary);
+      white-space: nowrap;
+      border-radius: 6px;
+      transition: none;
+
+      &:hover {
+        background: var(--app-surface-soft);
+      }
+
+      .el-icon {
+        flex-shrink: 0;
+        width: 20px;
+        margin-right: 8px;
+        font-size: 20px;
+      }
+
+      span {
+        overflow: hidden;
+        font-size: $layout-slider_font_size;
+        text-overflow: ellipsis;
+      }
+    }
+
+    :deep(.el-menu-item.is-active) {
+      color: var(--el-color-primary);
+      background: var(--app-primary-soft);
+    }
+
+    :deep(.el-sub-menu__title) {
+      margin: 0 8px;
+    }
+
+    :deep(.el-sub-menu.is-active > .el-sub-menu__title) {
+      color: var(--el-color-primary);
+    }
+
+    :deep(.el-sub-menu__icon-arrow) {
+      right: 12px;
+      width: 12px;
+      margin-right: 0;
+      font-size: 12px;
+    }
+  }
+
+  .layout-menu {
+    --el-transition-duration: var(--app-sidebar-duration);
+
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: var(--app-z-sidebar);
+    overflow: hidden;
+    contain: layout paint;
+    transition: width var(--app-sidebar-duration) var(--app-sidebar-easing);
+
+    .desktop-menu {
+      width: var(--app-sidebar-width);
+
+      &.el-menu--collapse {
+        width: var(--app-sidebar-collapsed-width);
+
+        :deep(.el-menu-tooltip__trigger),
+        :deep(> .el-menu-item),
+        :deep(> .el-sub-menu > .el-sub-menu__title) {
+          justify-content: flex-start;
+          padding: 0 14px;
+        }
+
+        :deep(.el-icon) {
+          margin-right: 0;
+          font-size: 20px;
+        }
+      }
+    }
+
+    &.layout-min-menu {
+      width: var(--app-sidebar-collapsed-width);
+    }
+  }
+
+  .mobile-navigation {
+    display: none;
+  }
+
+  .layout-main {
+    position: fixed;
+    inset: 0 0 0 var(--app-sidebar-width);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    transition: left var(--app-sidebar-duration) var(--app-sidebar-easing);
+
+    .layout-header {
+      z-index: var(--app-z-header);
+      flex: 0 0 $layout-header_height;
+      height: $layout-header_height;
+    }
+
+    .main-content {
+      flex: 1;
+      min-width: 0;
+      min-height: 0;
+      padding: var(--app-gap);
+      overflow: auto;
+      overscroll-behavior: contain;
+      background: var(--app-bg) !important;
+    }
+
+    &.layout-max-main {
+      left: var(--app-sidebar-collapsed-width);
+    }
+  }
+
+  .layout-footer {
+    display: flex;
+    flex: 0 0 48px;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 16px;
+    font-size: 14px;
+    background: var(--app-surface);
+  }
+
+  .layout-main:has(> .tagView[style*="display: none"]) {
+    :deep(.setting .refresh),
+    :deep(.setting .tab-full-screen) {
+      position: static;
+    }
+  }
+}
+
+@media (width < 640px) {
+  .layout {
     .layout-menu {
-        width: $layout-slider_width;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: $layout-slider_bgColor;
-        transition: all .3s;
-
-
-        &.bgMenuClassDark {
-            background-color: $layout-slider_bgDarkColor;
-        }
-
-        .el-menu {
-            border-right: none;
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden !important;
-            background: url('../../assets/image/layoutBg.png') no-repeat 0% 100%;
-            transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
-
-            :deep(span) {
-                font-size: $layout-slider_font_size;
-            }
-
-            :deep(.el-icon) {
-                font-size: 16px;
-            }
-
-        }
-
-
-
-        /*子菜单悬浮样式*/
-        :deep(.el-menu-item):hover {
-            background: $layout-slider_hover_bgColor !important;
-        }
-
-
-
-        &.layout-min-menu {
-            width: $layout-slider_min_width;
-        }
+      display: none;
     }
 
-    .layout-main {
-        width: calc(100% - $layout-slider_width);
-        position: fixed;
-        height: 100vh;
-        top: 0;
-        left: $layout-slider_width;
-        display: flex;
-        flex-direction: column;
-        transition: all .3s;
-
-        .layout-header {
-            width: 100%;
-            height: $layout-header_height;
-        }
-
-        .main-content {
-            width: 100%;
-            padding: 10px;
-            overflow: auto;
-            height: calc(100vh - $layout-header_height);
-
-
-        }
-
-        &.layout-max-main {
-            width: calc(100% - $layout-slider_min_width);
-            position: fixed;
-            top: 0;
-            left: $layout-slider_min_width;
-            display: flex;
-            flex-direction: column;
-        }
-
-
+    .layout-main,
+    .layout-main.layout-max-main {
+      left: 0;
     }
+
+    .mobile-navigation {
+      position: fixed;
+      inset: 0;
+      z-index: var(--app-z-mobile-navigation);
+      display: block;
+      pointer-events: none;
+      visibility: hidden;
+      transition: visibility 0s linear var(--app-motion-duration);
+
+      &.is-open {
+        pointer-events: auto;
+        visibility: visible;
+        transition-delay: 0s;
+
+        .mobile-menu-mask {
+          opacity: 1;
+        }
+
+        .mobile-menu-panel {
+          transform: translateX(0);
+        }
+      }
+    }
+
+    .mobile-menu-mask {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      cursor: pointer;
+      background: rgb(0 0 0 / 20%);
+      border: 0;
+      opacity: 0;
+      transition: opacity var(--app-motion-duration) var(--app-motion-easing);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-menu-panel {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: min(220px, 85vw);
+      height: 100%;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      transition: transform var(--app-motion-duration) var(--app-motion-easing);
+      transform: translateX(-100%);
+
+      > .el-menu {
+        width: 100%;
+      }
+
+      :deep(.layout_logo .title) {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    .layout-footer {
+      flex-basis: calc(48px + env(safe-area-inset-bottom));
+      height: calc(48px + env(safe-area-inset-bottom));
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layout .mobile-navigation {
+    transition: none;
+  }
 }

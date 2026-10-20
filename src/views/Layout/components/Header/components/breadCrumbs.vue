@@ -1,10 +1,17 @@
 <template>
   <div class="bread_crumbs" v-if="defaultSettings.isShowMenu">
-    <div class="toggle" @click="changeFlag">
-      <el-icon size="16">
+    <button
+      class="toggle"
+      type="button"
+      aria-label="展开或收起导航菜单"
+      aria-controls="main-navigation mobile-main-navigation"
+      :aria-pressed="settingStore.flag"
+      @click="changeFlag"
+    >
+      <el-icon size="20">
         <component :is="settingStore.flag ? 'Expand' : 'Fold'" />
       </el-icon>
-    </div>
+    </button>
     <el-breadcrumb
       separator="/"
       v-show="settingStore.page_setting.isShow_Bread"
@@ -14,9 +21,14 @@
         :key="i"
         :to="{ path: item.path }"
         v-show="item.meta.title"
-        class="animate__animated animate__fadeInRight"
+        class="animate__animated animate__fadeIn"
       >
-        {{ item.meta.title }}
+        <span class="breadcrumb-content">
+          <el-icon v-if="item.meta.icon">
+            <component :is="item.meta.icon" />
+          </el-icon>
+          {{ item.meta.title }}
+        </span>
       </el-breadcrumb-item>
     </el-breadcrumb>
   </div>
@@ -58,18 +70,48 @@ const routeComputed = computed(() => {
   display: flex;
   align-items: center;
   height: $layout-header_height;
+
   .toggle {
-    height: 100%;
     display: flex;
-    align-items: center;
-    width: 50px;
-    display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
+    width: 44px;
+    height: 36px;
+    padding: 0;
+    color: var(--app-text-secondary);
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-radius: 3px;
+
+    &:hover {
+      background: var(--app-surface-soft);
+    }
   }
+
   .el-breadcrumb {
-    margin-left: 10px;
-    font-size: 12px;
+    margin-left: 12px;
+    overflow: hidden;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .breadcrumb-content {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    color: var(--app-text-secondary);
+
+    .el-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+@media (width < 640px) {
+  .bread_crumbs .el-breadcrumb {
+    display: none;
   }
 }
 </style>

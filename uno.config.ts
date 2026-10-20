@@ -4,7 +4,7 @@ import {
   presetAttributify,
   presetIcons,
   presetTypography,
-  presetUno,
+  presetWind3,
   presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
@@ -29,15 +29,8 @@ export default defineConfig({
       primary_dark: "var(--el-color-primary-light-5)",
     },
   },
-  rules: [
-    // 使所有 UnoCSS 的类具有更高的优先级
-    [
-      /^bg-(\w+)/,
-      ([, color]) => ({ "background-color": color + "!important" }),
-    ],
-  ],
   presets: [
-    presetUno(),
+    presetWind3({ dark: "class" }),
     presetAttributify(),
     presetIcons(),
     presetTypography(),
