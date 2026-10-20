@@ -1,106 +1,248 @@
- <div align="center">
-  <img src="/src/assets/logo.png" />
- </div>
-
- <h1 align="center" style="margin: 30px 0 30px;display: flex;align-items: center;font-weight: bold;">
- xjy_admin
- </h1>
-
-一个基于Vue3+Element-plus+TypeScript搭建的轻量级（通用）后台管理系统模板，本模板相比其他后台管理模板，集成的插件和封装功能比较少，简单，通俗易懂。
-
 <div align="center">
-    <img src="https://img.shields.io/badge/Vue-3.5.44-%2341BA83"/>
-    <img src="https://img.shields.io/badge/Vite-7.3.7-%23A552FE"/>
-    <img src="https://img.shields.io/badge/Element_plus-2.14.7-%23409EFF"/>
-    <img src="https://img.shields.io/badge/Author-%20Dragon_xjy-blue"/>
-    <img src="https://img.shields.io/badge/%E9%80%9A%E7%94%A8%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86-xjy_admin-red"/>
-    <img src="https://gitee.com/dragon-xjy/xjy_admin/badge/star.svg"/>
-    <img src="https://gitee.com/dragon-xjy/xjy_admin/badge/fork.svg"/>
+  <img src="src/assets/logo.png" width="72" alt="xjy_admin Logo" />
+  <h1>xjy_admin</h1>
+  <p>轻量、清晰、开箱即用的 Vue 3 后台管理模板</p>
+  <p>
+    <img src="https://img.shields.io/badge/Vue-3.5.44-41B883" alt="Vue 3.5.44" />
+    <img src="https://img.shields.io/badge/Vite-7.3.7-646CFF" alt="Vite 7.3.7" />
+    <img src="https://img.shields.io/badge/Element_Plus-2.14.7-409EFF" alt="Element Plus 2.14.7" />
+    <img src="https://img.shields.io/badge/TypeScript-5.5.4-3178C6" alt="TypeScript 5.5.4" />
+  </p>
+  <p>
+    <a href="#快速开始">快速开始</a> ·
+    <a href="#功能概览">功能概览</a> ·
+    <a href="#页面预览">页面预览</a> ·
+    <a href="#项目结构">项目结构</a> ·
+    <a href="#配置说明">配置说明</a>
+  </p>
 </div>
 
-## 本地开发
+基于 Vue 3、Element Plus 和 TypeScript 构建，内置登录、权限菜单、工作台、主题设置及常用组件示例。项目使用 Mock 数据，可独立启动，适合后台页面原型、学习实践和管理系统项目起步。
 
-使用 Node.js **22.13+（22 LTS）或 24+**、pnpm **12.14.0**。版本约束写在 `package.json`，依赖版本由 `pnpm-lock.yaml` 固定。
+![浅色工作台：概览统计、访问趋势、技术栈与项目介绍](docs/screenshots/dashboard-light.png)
+
+## 功能概览
+
+| 功能        | 说明                                                       |
+| ----------- | ---------------------------------------------------------- |
+| 登录与权限  | 管理员、普通用户两种演示账号，按用户权限生成菜单与动态路由 |
+| 导航布局    | 侧栏展开与收起、多级菜单、面包屑、页面标签及页面刷新       |
+| 工作台      | 欢迎区、概览统计、ECharts 折线图与饼图、技术栈入口         |
+| 主题与设置  | 浅色 / 深色切换，设置抽屉可控制标签栏、Logo 和面包屑       |
+| 移动端      | 小屏抽屉导航、单列页面布局及图表、表单的响应式适配         |
+| Canvas 案例 | 图片选择、背景配色、文案绘制与图片导出                     |
+| 组件示例    | 分页器参数配置、富文本编辑器                               |
+| 基础体验    | 路由加载进度、页面缓存、404 页面                           |
+
+首页统计与图表内容用于界面演示。
+
+## 快速开始
+
+### 环境要求
+
+- Node.js **22.13+（22.x）或 24+**
+- pnpm **12.14.0**
+
+版本约束见 [package.json](package.json)，完整依赖版本由 [pnpm-lock.yaml](pnpm-lock.yaml) 固定。
+
+### 安装与启动
+
+在项目根目录执行：
 
 ```bash
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-开发地址为 <http://localhost:9000>。默认演示账号为 `admin / 123456`，普通用户为 `user / 123456`。
+浏览器访问 <http://localhost:9000>。
 
-```bash
-pnpm type-check   # 检查源码和 Vue 模板类型
-pnpm lint         # 检查 TS、Vue 脚本和模板，不自动改代码
-pnpm lint:style   # 检查 SCSS、Vue 样式和加载页 CSS
-pnpm build        # 先检查类型，再生成 dist
-pnpm check        # 执行以上检查和生产构建
-pnpm preview     # 预览生产构建，默认端口 4173
+### 演示账号
+
+| 角色     | 账号    | 密码     | 可访问内容                                   |
+| -------- | ------- | -------- | -------------------------------------------- |
+| 管理员   | `admin` | `123456` | 首页、文档、Canvas、分页器、富文本及多级菜单 |
+| 普通用户 | `user`  | `123456` | 首页、文档、富文本编辑器                     |
+
+账号与权限数据位于 [src/mock/index.ts](src/mock/index.ts)。
+
+## 常用命令
+
+| 命令              | 用途                                       |
+| ----------------- | ------------------------------------------ |
+| `pnpm dev`        | 启动开发服务，默认端口 `9000`              |
+| `pnpm type-check` | 检查 TypeScript 源码与 Vue 模板类型        |
+| `pnpm lint`       | 检查脚本和 Vue 模板                        |
+| `pnpm lint:style` | 检查 CSS、SCSS 与 Vue 样式                 |
+| `pnpm build`      | 执行类型检查并生成生产构建                 |
+| `pnpm check`      | 执行脚本检查、样式检查、类型检查与生产构建 |
+| `pnpm preview`    | 本地预览生产构建，默认端口 `4173`          |
+
+## 页面预览
+
+以下截图采集于 **2026-10-20**，来自当前项目的本地生产构建。桌面视口宽度为 `1440px`，移动端视口为 `390 × 844px`；图片保存在 [docs/screenshots](docs/screenshots/)。
+
+### 桌面端
+
+<details>
+<summary>登录页面</summary>
+
+欢迎区与登录表单采用双栏布局，保留项目 Logo、插画和演示账号提示。
+
+![桌面端登录页面](docs/screenshots/login-desktop.png)
+
+</details>
+
+<details>
+<summary>深色工作台</summary>
+
+深色主题覆盖导航、标签栏、卡片和图表容器。
+
+![深色主题工作台](docs/screenshots/dashboard-dark.png)
+
+</details>
+
+<details>
+<summary>项目配置</summary>
+
+通过设置抽屉切换主题，并控制标签栏、侧栏 Logo 和面包屑的显示。
+
+![项目配置抽屉](docs/screenshots/settings-desktop.png)
+
+</details>
+
+<details>
+<summary>Canvas 图片绘制</summary>
+
+选择图片、背景色并输入文案，即可预览组合效果并导出图片。
+
+![Canvas 案例：图片、背景色与文案绘制](docs/screenshots/canvas-desktop.png)
+
+</details>
+
+<details>
+<summary>分页器</summary>
+
+通过配置项体验分页器的尺寸、背景、禁用状态及页码交互。
+
+![分页器配置示例](docs/screenshots/pagination-desktop.png)
+
+</details>
+
+<details>
+<summary>富文本编辑器</summary>
+
+基于 WangEditor，提供内容编辑与常用排版工具。
+
+![富文本编辑器示例](docs/screenshots/editor-desktop.png)
+
+</details>
+
+### 移动端
+
+小于 `640px` 时，侧栏切换为带遮罩的抽屉导航；登录页收为单列，工作台卡片与图表按屏幕宽度重新排列。
+
+<table>
+  <thead>
+    <tr>
+      <th>登录</th>
+      <th>工作台</th>
+      <th>抽屉导航</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="docs/screenshots/login-mobile.png" width="250" alt="移动端登录页面" /></td>
+      <td><img src="docs/screenshots/dashboard-mobile.png" width="250" alt="移动端工作台" /></td>
+      <td><img src="docs/screenshots/navigation-mobile.png" width="250" alt="移动端展开导航与二级菜单" /></td>
+    </tr>
+  </tbody>
+</table>
+
+## 技术栈
+
+| 类别       | 技术                     | 当前版本        |
+| ---------- | ------------------------ | --------------- |
+| 应用与路由 | Vue / Vue Router         | 3.5.44 / 4.6.4  |
+| 组件与图标 | Element Plus / Icons Vue | 2.14.7 / 2.3.2  |
+| 状态管理   | Pinia                    | 2.3.1           |
+| 开发语言   | TypeScript               | 5.5.4           |
+| 构建工具   | Vite / Vue 插件          | 7.3.7 / 6.0.10  |
+| 原子样式   | UnoCSS                   | 66.11.0         |
+| 数据可视化 | ECharts                  | 5.6.0           |
+| 富文本     | WangEditor / Vue 适配器  | 5.1.23 / 5.1.12 |
+| 请求与模拟 | Axios / MockJS           | 1.20.0 / 1.1.0  |
+
+代码质量工具包括 ESLint、Stylelint、Prettier 和 vue-tsc，具体配置位于项目根目录。
+
+## 项目结构
+
+```text
+xjy_admin/
+├── docs/
+│   ├── screenshots/        # 当前界面截图
+│   └── licenses/           # 第三方资源许可
+├── public/                 # 静态资源与加载页
+├── src/
+│   ├── api/                # 接口与相关类型
+│   ├── assets/             # 图片、图标等资源
+│   ├── components/         # 公共组件
+│   ├── config/             # 站点配置与公共样式
+│   ├── mock/               # 演示接口与权限数据
+│   ├── router/             # 常量路由与权限路由
+│   ├── stores/             # 用户、布局与主题状态
+│   ├── styles/             # 全局样式、主题与动效
+│   ├── utils/              # 请求、存储等工具
+│   ├── views/              # 登录、布局及功能页面
+│   ├── permission.ts       # 路由访问控制
+│   └── main.ts             # 应用入口
+├── .env.development        # 开发环境变量
+├── .env.production         # 生产环境变量
+├── package.json            # 依赖与脚本
+├── pnpm-lock.yaml          # 依赖锁文件
+├── uno.config.ts           # UnoCSS 配置
+└── vite.config.ts          # 构建与开发代理配置
 ```
 
-## 依赖与样式维护
+## 配置说明
 
-本次适配保留 Vue 3 + Element Plus 的现有架构，更新 Vite、UnoCSS、Vue 类型工具与 ESLint，并清理未使用的 webpack/Sass loader、重复插件及不兼容的 Stylelint 配置。ESLint 使用 flat config；检查与自动修复命令分开，避免检查时改动业务脚本。
+### 站点与界面
 
-| 组合 | 固定版本 | 兼容说明 |
-| --- | --- | --- |
-| Vue / Vue Router | 3.5.44 / 4.6.4 | 同一套 Vue 3.5 运行时 |
-| Vite / Vue 插件 | 7.3.7 / 6.0.10 | 匹配构建插件和现代 Sass 接口 |
-| Pinia / 持久化插件 | 2.3.1 / 3.2.3 | 兼容现有 `paths` 配置；保留原有插件注册方式 |
-| TypeScript / vue-tsc | 5.5.4 / 3.3.13 | 保留现有 JS 表达式，避免引入需要修改运行代码的新语法诊断 |
-| ESLint / Vue 插件 | 10.13.0 / 10.11.1 | 配合 typescript-eslint 8 和 Vue 解析器 10 |
-| Stylelint / Vue 配置 / HTML 解析器 | 16.26.1 / 2.0.0 / 2.0.0 | 移除已失效的格式规则与 peer 冲突 |
+| 配置内容                         | 文件位置                                                       |
+| -------------------------------- | -------------------------------------------------------------- |
+| 项目名称、Logo、默认界面选项     | [src/config/setting.ts](src/config/setting.ts)                 |
+| 主题颜色、间距、圆角、侧栏宽度   | [src/styles/theme.scss](src/styles/theme.scss)                 |
+| 主题过渡、侧栏动效时长、浮层层级 | [src/styles/motion.scss](src/styles/motion.scss)               |
+| Element Plus Sass 主题           | [src/styles/element/index.scss](src/styles/element/index.scss) |
+| 全局样式入口                     | [src/styles/index.scss](src/styles/index.scss)                 |
+| 布局与响应式样式                 | [src/views/Layout/index.scss](src/views/Layout/index.scss)     |
 
-源码仅修正类型标注、类型导入及模板兼容属性，业务 JS 与 Vue 脚本逻辑保持一致。Canvas 案例补齐父路由 `canvas-layout` 名称和管理员的对应路由权限项，以恢复现有权限过滤下的菜单与页面；绘制、图片选择、颜色、文案与导出逻辑保持原样。`skipLibCheck` 仅跳过第三方声明文件的检查，项目源码与 Vue 模板仍由 `vue-tsc` 检查。后续升级 TypeScript 或 Pinia 大版本前，需要先评估现有业务写法与插件 API。
+基础过渡时长通过 `--app-motion-duration` 统一配置，默认为 `300ms`。桌面侧栏使用 Element Plus 原生折叠动画，侧栏时长由 `--app-sidebar-duration` 控制。设置抽屉的层级高于导航与菜单弹层。
 
-管理布局参考 [Soybean Admin](https://github.com/soybeanjs/soybean-admin/blob/main/src/theme/settings.ts) 的默认主题：`#646cff` 主色、浅灰页面背景、56px 页头、220px / 64px 侧栏、Chrome 风格标签和 8px 卡片圆角。登录页保留本项目的 Logo 和人物素材，采用欢迎区与登录表单的双栏布局；首页采用简洁的工作台概览，保留原有图表和技术栈入口。首页概览中的统计数字为静态演示内容，图表数据、交互、登录和权限逻辑均保持原样。
+### 菜单与权限
 
-主题颜色集中在 `src/styles/theme.scss`，Element Plus 的 Sass 主题位于 `src/styles/element/index.scss`。`src/styles/motion.scss` 统一管理 `--app-motion-duration`（默认 `300ms`）、`--app-motion-easing` 和浮层层级。桌面侧栏恢复 Element Plus 原生折叠动画，`--app-sidebar-duration` 默认跟随基础时长，`--app-sidebar-easing` 使用与原生宽度过渡相同的 `ease-in-out`；内容区与 Logo 同步。主题颜色通过 CSS `@property` 在根节点统一插值，组件直接使用同一帧的颜色，避免嵌套动画造成不同步；主题切换保持 `300ms`，尊重系统的减少动态效果设置。面包屑使用淡入，不再横向滑入。
+路由定义位于 [src/router/route.ts](src/router/route.ts)，通过 `meta.title`、`meta.icon` 和 `meta.isShow` 配置菜单名称、图标及显示状态。权限菜单由用户信息与动态路由配置共同生成，入口见 [src/permission.ts](src/permission.ts) 和 [src/stores/modules/user.ts](src/stores/modules/user.ts)。
 
-桌面使用一个 `el-menu`，绑定现有的 `flag` 并开启 `collapse-transition`，由 Element Plus 控制宽度和文字切换，不再使用两份固定菜单做淡入淡出。子菜单使用 `flow-root` 隔离外边距，行间距放在菜单项容器上，避免原生高度动画切换 `overflow` 时文字上下跳动。现有路由配置、菜单点击与业务脚本保持原样。小于 `640px` 时，导航切换为带遮罩的抽屉，点击菜单后自动收起；首页图表改为单列，统计卡片按宽度排列，登录页收为单列表单。设置抽屉挂载到 `body`，其遮罩和面板的层级高于桌面导航、移动端导航与菜单弹层。太阳、月亮和设置齿轮保留本项目的原始图标。参考项目 SVG 与标签几何图形的许可说明见 `docs/licenses/soybean-admin.txt`。
+### Mock 与接口
 
-Element Plus 的完整主题只编译一次，组件自动导入不再重复插入样式。全局 Sass 与布局样式改用 `@use`，避免旧 Sass API 和 `@import` 的弃用提示。
+当前在 [src/main.ts](src/main.ts) 中加载 Mock 数据，登录和用户信息接口定义于 [src/mock/index.ts](src/mock/index.ts)，请求封装位于 [src/utils/request.ts](src/utils/request.ts)。
 
-生产构建仍可能提示 MockJS 内部使用 `eval`，以及 ECharts / 编辑器打包体积较大；这些是既有库的非阻断提示，构建会正常生成 `dist`。后续若要替换 MockJS 或对图表进行按需导入，需要单独调整业务脚本。
+- `VITE_BASE_URL`：接口请求前缀，默认 `/api`。
+- `VITE_URL`：开发代理的目标地址，在 [vite.config.ts](vite.config.ts) 中使用。
 
-## 特性
+接入后端时，根据实际服务调整 Mock 入口、环境变量及接口返回结构；生产环境的接口转发由部署服务器配置。
 
-- 前端：Vue3+Element-plus+Vite
-- 后端：无后端（项目采用mockjs模拟数据）
-- 项目基本结构：
+## 构建与部署
 
+```bash
+# 完成检查并生成生产构建
+pnpm check
 
-![alt text](/src/assets/doc/image-2.png)
+# 本地预览 dist
+pnpm preview
+```
 
-## 预览
+构建产物输出到 `dist/`。项目使用 Hash 路由，静态部署时上传 `dist/` 内的完整文件，并保留资源目录结构。
 
+## 许可证
 
-xjy_admin提供了以下演示和文档资源:
-
-- 账户信息：(管理员)账号：admin，密码：123456
-- 账户信息: (普通用户) 账号：user，密码：123456
-- 在线地址：[xjy_admin](https://dragon-xjy.atomgit.net/xjy-admin/#/home)
-- 文档地址：[xjy_admin](https://juejin.cn/post/7380283122489081856)
-
-
-## 效果展示
-![alt text](src/assets/doc/image.png)
-
-![alt text](src/assets/doc/image-1.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+项目采用 [Mulan PSL v2](LICENSE)。随附资源的独立许可保存在 [docs/licenses](docs/licenses/)。
