@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{h as c,y as t}from"./index-COEXosqa.js";const o={},r={class:"three"};function s(_,a){return c(),t("div",r,"三级菜单-1")}const f=e(o,[["render",s],["__scopeId","data-v-ea476c86"]]);export{f as default};

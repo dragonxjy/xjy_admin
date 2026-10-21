@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{am as s,h as r,y as a,l as n,z as c}from"./index-COEXosqa.js";const _={},d={class:"twoMenu"};function i(m,e){const o=s("router-view");return r(),a("div",d,[e[0]||(e[0]=n("div",{class:"two"},"二级菜单",-1)),c(o)])}const f=t(_,[["render",i],["__scopeId","data-v-b7c4847a"]]);export{f as default};
