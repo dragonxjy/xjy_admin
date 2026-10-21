@@ -1,0 +1,1 @@
+import{_ as s}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{am as t,h as n,y as r,l as a,z as c}from"./index-COEXosqa.js";const _={},d={class:"oneMenu"};function i(m,e){const o=t("router-view");return n(),r("div",d,[e[0]||(e[0]=a("div",{class:"one"},"一级菜单",-1)),c(o)])}const f=s(_,[["render",i],["__scopeId","data-v-de9502ca"]]);export{f as default};
