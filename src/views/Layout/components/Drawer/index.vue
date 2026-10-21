@@ -1,6 +1,6 @@
 <template>
   <!-- 设置 -->
-  <el-drawer :show-close="false" size="300" append-to-body modal-class="settings-overlay">
+  <el-drawer :show-close="false" :size="defaultSettings.settingsWidth" append-to-body modal-class="settings-overlay">
     <template #header>
       <div
         :class="{ blackTitle: settingStore.dark, title: !settingStore.dark }"
@@ -33,6 +33,38 @@
             </div>
           </div>
         </div>
+        <div class="theme-color-setting">
+          <div class="theme-color-heading">
+            <span>主题色</span>
+            <el-button text size="small" @click="settingStore.changePrimaryColor(themeConfig.primaryColor)">
+              恢复默认
+            </el-button>
+          </div>
+          <div class="theme-color-presets" aria-label="预设主题色">
+            <button
+              v-for="color in themeConfig.colors"
+              :key="color.value"
+              type="button"
+              class="theme-color-swatch"
+              :style="{ backgroundColor: color.value }"
+              :aria-label="`切换为${color.name}主题`"
+              :aria-pressed="settingStore.primaryColor === color.value"
+              :title="color.name"
+              @click="settingStore.changePrimaryColor(color.value)"
+            >
+              <ElIconCheck v-if="settingStore.primaryColor === color.value" />
+            </button>
+          </div>
+          <label class="custom-theme-color">
+            <span>自定义颜色</span>
+            <input
+              type="color"
+              aria-label="自定义主题色"
+              :value="settingStore.primaryColor"
+              @input="settingStore.changePrimaryColor(($event.target as HTMLInputElement).value)"
+            />
+          </label>
+        </div>
         <!-- 界面设置 -->
         <div :class="{ blackTip: settingStore.dark, tip: !settingStore.dark }">
           <text>页面设置</text>
@@ -58,24 +90,9 @@
 
 <script setup lang="ts">
 import { useSettingStore } from "@/stores/modules/setting"
-import { GETDARK } from "@/utils/local"
+import { defaultSettings, themeConfig } from "@/config/setting"
 import { toggleDark } from "@/utils/changeDark"
 const settingStore = useSettingStore()
-// const props = defineProps<{
-//   drawerShow: boolean
-// }>()
-// const emit = defineEmits<{
-//   changeDrawer: [val: boolean]
-// }>()
-// const drawerShowa = computed({
-//   get() {
-//     return props.drawerShow
-//   },
-//   set(newVal) {
-//     emit("changeDrawer", newVal)
-//   },
-// })
-// const model = defineModel("drawerShow", { default: false })
 </script>
 
 <style scoped lang="scss">
@@ -142,6 +159,56 @@ const settingStore = useSettingStore()
   .avtiveTopicItemDark {
     background: var(--app-surface);
     box-shadow: var(--app-shadow);
+  }
+
+
+  .theme-color-setting {
+    margin-bottom: 28px;
+  }
+
+  .theme-color-heading,
+  .custom-theme-color {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--app-text-secondary);
+  }
+
+  .theme-color-presets {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin: 12px 0 16px;
+  }
+
+  .theme-color-swatch {
+    display: grid;
+    flex: 0 1 30px;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    border-radius: 6px;
+
+    &[aria-pressed="true"] {
+      outline: 2px solid var(--el-color-primary);
+      outline-offset: 3px;
+    }
+  }
+
+  .custom-theme-color input {
+    width: 32px;
+    height: 28px;
+    padding: 2px;
+    cursor: pointer;
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: 6px;
   }
 
   .set_item {

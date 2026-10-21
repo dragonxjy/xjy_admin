@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import * as echarts from "echarts"
+import * as echarts from "@/utils/echarts"
 import { useResizeObserver } from "@vueuse/core"
 const lineRef = ref<HTMLDivElement | null>(null)
 let myChart: echarts.ECharts | undefined
@@ -150,9 +150,3 @@ onBeforeUnmount(() => {
   myChart?.dispose()
 })
 </script>
-
-<style scoped>
-.box {
-  color: rgb(8 171 231 / 80%);
-}
-</style>

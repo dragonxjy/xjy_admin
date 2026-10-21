@@ -5,15 +5,12 @@
   </el-config-provider>
 </template>
 <script lang="ts" setup>
-import { ElConfigProvider } from "element-plus"
 import zhCn from "element-plus/es/locale/lang/zh-cn"
-import { GETDARK } from "./utils/local"
-onMounted(() => {
-  if (GETDARK()) {
-    document.documentElement.className = "dark"
-  } else {
-    document.documentElement.className = ""
-  }
+import { useSettingStore } from "@/stores/modules/setting"
+const settings = useSettingStore()
+watchEffect(() => {
+  document.documentElement.classList.toggle("dark", settings.dark)
+  document.documentElement.style.setProperty("--app-primary-color", settings.primaryColor)
 })
 </script>
 <style></style>

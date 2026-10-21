@@ -75,7 +75,7 @@ export const asyncRouter: RouteRecordRaw[] = [
       {
         path: "/components/pagination",
         name: "pagination",
-        meta: { title: "分页器 ", icon: "MoreFilled", isShow: true },
+        meta: { title: "组件示例", icon: "Grid", isShow: true },
         component: () => import("@/views/Components/pagination/index.vue"),
       },
       {

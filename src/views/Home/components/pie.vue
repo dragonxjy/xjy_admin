@@ -3,9 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import * as echarts from "echarts"
+import * as echarts from "@/utils/echarts"
 import { useResizeObserver } from "@vueuse/core"
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 const pieRef = ref<HTMLDivElement | null>(null)
 let myChart: echarts.ECharts | undefined
 onMounted(() => {
@@ -59,5 +58,3 @@ onBeforeUnmount(() => {
   myChart?.dispose()
 })
 </script>
-
-<style scoped></style>

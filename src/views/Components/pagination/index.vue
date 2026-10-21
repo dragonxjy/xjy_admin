@@ -1,143 +1,168 @@
 <template>
-  <el-row justify="space-between" align="middle" :gutter="24" class="pagination">
-    <el-col :xs="24" :sm="24" :md="24" :lg="16">
-      <div class="view">
-        <!-- 封装分页器 -->
-        <Elpagination
-          :config="config"
-          :paginationParams="paginationParams"
-          @pageChange="pageChange"
-          @pageSizeChange="pageSizeChange"
-        />
-      </div>
-    </el-col>
-    <el-col :xs="24" :sm="24" :md="24" :lg="8">
-      <el-card class="content">
-        <div class="card-header">
-          <span>操作</span>
-        </div>
-        <div class="base_config">
-          <!-- 基本配置 -->
-          <div class="base_item">
-            <text>背景色</text>
-            <el-switch v-model="config.background" />
-          </div>
-          <div class="base_item">
-            <text>小型分页</text>
-            <el-switch v-model="config.small" />
-          </div>
-          <div class="base_item">
-            <text>禁用</text>
-            <el-switch v-model="config.disabled" />
-          </div>
-          <div class="base_item">
-            <text>当前页</text>
-            <el-input-number
-              v-model="paginationParams.page"
-              :min="1"
-              :max="paginationParams.total / paginationParams.pageSize"
-            />
-          </div>
-          <div class="base_item">
-            <text>每页条数</text>
-            <el-input-number
-              v-model="paginationParams.pageSize"
-              :step="10"
-              :min="10"
-              :max="config.page_sizes[config.page_sizes.length - 1]"
-            />
-          </div>
+  <div class="component-showcase">
+
+
+    <div class="showcase-grid">
+      <el-card class="demo-card message-demo">
+        <template #header><h2>消息提示</h2></template>
+        <p>不同状态使用对应的图标与颜色，提示会自动关闭。</p>
+        <div class="demo-actions">
+          <el-button type="success" plain @click="message('success', '保存成功，最新配置已生效')">成功提示</el-button>
+          <el-button type="warning" plain @click="message('warning', '请检查填写内容后再继续操作')">警告提示</el-button>
+          <el-button type="danger" plain @click="message('error', '提交失败，请稍后重试')">错误提示</el-button>
+          <el-button type="info" plain @click="message('info', '这是一条普通消息，欢迎体验公共组件')">普通提示</el-button>
+          <el-button plain @click="message('info', '这是一条较长的提示消息：页面内容已更新，你可以继续浏览。窄屏下文本会自动换行，保持完整、清晰的阅读体验。')">长文本提示</el-button>
         </div>
       </el-card>
-    </el-col>
-  </el-row>
+
+      <el-card class="demo-card">
+        <template #header><h2>通知提醒</h2></template>
+        <p>适合展示带标题的任务结果和操作提醒。</p>
+        <div class="demo-actions">
+          <el-button type="primary" plain @click="notification('任务已完成', '本次操作已处理完成，可以继续下一步。', 'success')">成功通知</el-button>
+          <el-button plain @click="notification('待办提醒', '你有一项新的待办，请及时查看。', 'info')">普通通知</el-button>
+        </div>
+      </el-card>
+
+      <el-card class="demo-card">
+        <template #header><h2>确认弹窗</h2></template>
+        <p>体验确认与取消操作，这里的演示不会修改业务数据。</p>
+        <div class="demo-actions">
+          <el-button type="primary" @click="confirmDemo">打开确认弹窗</el-button>
+        </div>
+      </el-card>
+
+      <el-card class="demo-card editor-entry">
+        <template #header><h2>富文本编辑</h2></template>
+        <el-icon class="editor-entry-icon"><ElIconEditPen /></el-icon>
+        <p>在独立示例中体验文本输入、排版和内容编辑。</p>
+        <el-button type="primary" plain @click="router.push('/components/edit')">打开富文本示例</el-button>
+      </el-card>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { message } from "@/Hooks/element"
-import type {
-  paginationConfigType,
-  paginationParamsType,
-} from "@/components/Elpagination/type"
+import { useRouter } from "vue-router"
+import { message, messageBox, notification } from "@/Hooks/element"
 
-const config = reactive(<paginationConfigType>{
-  background: true,
-  small: false,
-  disabled: false,
-  layout: "total, sizes, prev, pager, next, jumper",
-  page_sizes: [10, 20],
-})
-const paginationParams = reactive(<paginationParamsType>{
-  page: 1,
-  pageSize: config.page_sizes[0],
-  total: 100,
-})
-const pageChange = (val: number) => {
-  message("info", "当前页变化")
-  paginationParams.page = val
-}
-const pageSizeChange = (val: number) => {
-  message("info", "每页条数变化")
-  paginationParams.pageSize = val
+const router = useRouter()
+const confirmDemo = async () => {
+  try {
+    await messageBox("操作确认", "是否继续本次演示操作？", "warning")
+    message("success", "已确认本次演示操作")
+  } catch (action) {
+    if (action === "cancel" || action === "close") {
+      message("info", "已取消操作")
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.pagination {
-  row-gap: var(--app-gap);
-  width: auto;
-  min-height: 100%;
+.component-showcase {
+  display: grid;
+  gap: var(--app-gap);
+  min-width: 0;
 
-  .view {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 420px;
-    padding: 24px;
-    overflow: auto;
-    background: var(--app-surface);
-    border: 1px solid var(--app-border);
-    border-radius: var(--app-radius);
-    box-shadow: var(--app-shadow);
+  h1,
+  h2,
+  p {
+    margin: 0;
   }
 
-  .content {
-    min-height: 420px;
+  h1 {
+    margin: 8px 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--app-text);
   }
 
-  .card-header {
-    padding-bottom: 16px;
+  h2 {
     font-size: 15px;
     font-weight: 600;
     color: var(--app-text);
-    border-bottom: 1px solid var(--app-border);
   }
 
-  .base_config {
-    margin-top: 12px;
-  }
-
-  .base_item {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 58px;
+  p {
     font-size: 13px;
-    color: var(--app-text-secondary);
-    border-bottom: 1px solid var(--app-border);
-
-    &:last-child {
-      border-bottom: 0;
-    }
+    line-height: 1.8;
+    color: var(--app-text-muted);
   }
 }
 
-@media (width <= 767px) {
-  .pagination .view {
-    justify-content: flex-start;
-    min-height: 180px;
-    padding: 16px;
+.showcase-intro :deep(.el-card__body) {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.showcase-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--el-color-primary);
+  letter-spacing: 2px;
+}
+
+.intro-icon {
+  flex-shrink: 0;
+  padding: 16px;
+  font-size: 64px;
+  color: var(--el-color-primary);
+  background: var(--app-primary-soft);
+  border-radius: 18px;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--app-gap);
+}
+
+.demo-card {
+  min-width: 0;
+
+  :deep(.el-card__header) {
+    padding: 18px 24px;
+    border-color: var(--app-border);
+  }
+}
+
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+
+  .el-button + .el-button {
+    margin-left: 0;
+  }
+}
+
+.editor-entry-icon {
+  margin-bottom: 12px;
+  font-size: 32px;
+  color: var(--el-color-primary);
+}
+
+.editor-entry p {
+  margin-bottom: 20px;
+}
+
+@media (width < $layout-mobile-breakpoint) {
+  .showcase-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .component-showcase h1 {
+    font-size: 18px;
+  }
+
+  .intro-icon {
+    padding: 10px;
+    font-size: 44px;
+    border-radius: 12px;
   }
 }
 </style>

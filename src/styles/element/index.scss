@@ -1,10 +1,16 @@
 @forward "element-plus/theme-chalk/src/common/var.scss" with (
   $colors: (
-    "primary": ("base": #646cff),
+    // 主色：按钮、选中菜单与交互链接。
+    "primary": ("base": #409eff),
+    // 成功状态。
     "success": ("base": #52c41a),
+    // 信息状态。
     "info": ("base": #64748b),
+    // 警告状态。
     "warning": ("base": #faad14),
+    // 危险操作状态。
     "danger": ("base": #f5222d),
+    // 错误状态，与危险色保持一致。
     "error": ("base": #f5222d)
   )
 );

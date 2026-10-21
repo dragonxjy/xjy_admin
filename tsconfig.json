@@ -20,8 +20,7 @@
       "node",
       "vite/client",
       "element-plus/global",
-      "unplugin-auto-import/types",
-      "pinia-plugin-persistedstate"
+      "unplugin-auto-import/types"
     ],
     "paths": {
       "@/*": [

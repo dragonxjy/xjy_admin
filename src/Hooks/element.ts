@@ -1,4 +1,3 @@
-import { ElMessage, ElMessageBox, ElNotification } from "element-plus"
 import type {
   ElMessageBoxOptions,
   MessageType,
@@ -10,6 +9,7 @@ export const message = (type: MessageType, message: string) => {
     message,
     type,
     plain: true,
+    customClass: "app-message",
     duration: 1000,
   })
 }

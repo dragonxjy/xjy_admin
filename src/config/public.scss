@@ -1,15 +1,77 @@
-// Layout dimensions follow Soybean Admin's default vertical layout.
-$layout-slider_bgColor: #fff;
-$layout-slider_bgDarkColor: #1c1c1c;
-$layout-slider_hover_bgColor: var(--app-surface-soft);
-$layout-slider_active_color: #646cff;
-$layout-slider_width: 220px;
-$layout-slider_min_width: 64px;
+// 导航展开宽度。
+$layout-sidebar-width: 260px;
+
+// 导航收起宽度。
+$layout-sidebar-collapsed-width: 64px;
+
+// 移动端断点：小于该宽度时使用抽屉导航。
+$layout-mobile-breakpoint: 640px;
+
+// 页面内容间距。
+$layout-gap: 16px;
+
+// 卡片、弹层等容器的基础圆角。
+$layout-radius: 8px;
+
+// 导航菜单文字大小。
 $layout-slider_font_size: 14px;
+
+// 菜单行高，一级菜单、子菜单与收起后的浮层共用。
+$layout-menu-item-height: 42px;
+
+// 每深入一级菜单增加的左侧缩进。
+$layout-menu-level-indent: 18px;
+
+// 第一级菜单内容的左侧内边距。
+$layout-menu-base-padding: 14px;
+
+// 菜单左侧图标大小，不影响右侧展开箭头。
+$layout-menu-icon-size: 20px;
+
+// 菜单图标与文字之间的间距。
+$layout-menu-icon-gap: 8px;
+
+// 子菜单展开箭头的字号与图标框大小。
+$layout-menu-arrow-size: 11px;
+
+// 展开箭头距离菜单行右侧的距离。
+$layout-menu-arrow-offset: 12px;
+
+// 导航顶部 Logo 区域高度。
 $layout-Logo-height: 56px;
+
+// Logo 图片宽度。
 $layout-logo_width: 32px;
+
+// Logo 图片高度。
 $layout-logo_height: 32px;
+
+// Logo 旁的项目名称字号。
 $layout-title_size: 16px;
-$layout-title_color: var(--el-color-primary);
+
+// 顶部操作栏高度。
 $layout-header_height: 56px;
-$layout-header_hoverbgColor: var(--app-surface-soft);
+
+// 主题、页面、抽屉等基础过渡时长，统一由此处调整。
+$motion-duration: 300ms;
+
+// 主题、页面和抽屉过渡的缓动曲线。
+$motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+// 侧栏保留 Element Plus 原生展开 / 收起时使用的缓动方式。
+$sidebar-easing: ease-in-out;
+
+// 顶部操作栏层级。
+$z-header: 20;
+
+// 页面标签栏层级。
+$z-tabs: 10;
+
+// 桌面导航层级。
+$z-sidebar: 30;
+
+// 移动端导航与遮罩层级。
+$z-mobile-navigation: 100;
+
+// 设置抽屉层级，保持高于导航和菜单弹层。
+$z-settings: 4000;

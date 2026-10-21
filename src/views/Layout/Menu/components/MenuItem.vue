@@ -6,7 +6,7 @@
       v-if="routes.meta.isShow && !routes.children"
     >
       <el-icon>
-        <component :is="routes.meta.icon"></component>
+        <component :is="resolveMenuIcon(routes.meta.icon)"></component>
       </el-icon>
       <template #title>
         <span>{{ routes.meta.title }}</span>
@@ -18,7 +18,7 @@
       v-if="routes.children && !routes.meta.isShow"
     >
       <el-icon>
-        <component :is="routes.children[0].meta.icon"></component>
+        <component :is="resolveMenuIcon(routes.children[0].meta.icon)"></component>
       </el-icon>
       <template #title>
         <span>{{ routes.children[0].meta.title }}</span>
@@ -32,7 +32,7 @@
     >
       <template #title>
         <el-icon>
-          <component :is="routes.meta.icon"></component>
+          <component :is="resolveMenuIcon(routes.meta.icon)"></component>
         </el-icon>
         <span>{{ routes.meta.title }}</span>
       </template>
@@ -43,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import { resolveMenuIcon } from "@/config/icons"
 const props = defineProps<{
   menuRouteList: any
 }>()

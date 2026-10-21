@@ -23,11 +23,11 @@
       background: transparent;
       border-right: 0;
 
-      --el-menu-base-level-padding: 14px;
-      --el-menu-level-padding: 18px;
-      --el-menu-item-height: 42px;
-      --el-menu-sub-item-height: 42px;
-      --el-menu-icon-width: 20px;
+      --el-menu-base-level-padding: var(--app-menu-base-padding);
+      --el-menu-level-padding: var(--app-menu-level-indent);
+      --el-menu-item-height: var(--app-menu-item-height);
+      --el-menu-sub-item-height: var(--app-menu-item-height);
+      --el-menu-icon-width: var(--app-menu-icon-size);
     }
 
     :deep(.el-menu) {
@@ -51,10 +51,10 @@
 
     :deep(.el-menu-item),
     :deep(.el-sub-menu__title) {
-      height: 42px;
+      height: var(--app-menu-item-height);
       margin: 4px 8px;
       overflow: hidden;
-      line-height: 42px;
+      line-height: var(--app-menu-item-height);
       color: var(--app-text-secondary);
       white-space: nowrap;
       border-radius: 6px;
@@ -66,9 +66,9 @@
 
       .el-icon {
         flex-shrink: 0;
-        width: 20px;
-        margin-right: 8px;
-        font-size: 20px;
+        width: var(--app-menu-icon-size);
+        margin-right: var(--app-menu-icon-gap);
+        font-size: var(--app-menu-icon-size);
       }
 
       span {
@@ -91,11 +91,14 @@
       color: var(--el-color-primary);
     }
 
-    :deep(.el-sub-menu__icon-arrow) {
-      right: 12px;
-      width: 12px;
+    // 与行图标分开设置尺寸，避免箭头继承 20px 高度后偏离文字中心。
+    :deep(.el-sub-menu__title > .el-sub-menu__icon-arrow) {
+      right: var(--app-menu-arrow-offset);
+      width: var(--app-menu-arrow-size);
+      height: var(--app-menu-arrow-size);
+      margin-top: calc(var(--app-menu-arrow-size) / -2);
       margin-right: 0;
-      font-size: 12px;
+      font-size: var(--app-menu-arrow-size);
     }
   }
 
@@ -119,12 +122,12 @@
         :deep(> .el-menu-item),
         :deep(> .el-sub-menu > .el-sub-menu__title) {
           justify-content: flex-start;
-          padding: 0 14px;
+          padding: 0 var(--app-menu-base-padding);
         }
 
         :deep(.el-icon) {
           margin-right: 0;
-          font-size: 20px;
+          font-size: var(--app-menu-icon-size);
         }
       }
     }
@@ -186,7 +189,7 @@
   }
 }
 
-@media (width < 640px) {
+@media (width < $layout-mobile-breakpoint) {
   .layout {
     .layout-menu {
       display: none;
@@ -238,7 +241,7 @@
     .mobile-menu-panel {
       position: absolute;
       inset: 0 auto 0 0;
-      width: min(220px, 85vw);
+      width: min(var(--app-sidebar-width), 85vw);
       height: 100%;
       padding-top: env(safe-area-inset-top);
       padding-bottom: env(safe-area-inset-bottom);

@@ -1,3 +1,5 @@
+import { defaultSettings } from "@/config/setting"
+
 //存token
 export const SETTOKEN = (token: string) => {
   localStorage.setItem("TOKEN", token)
@@ -13,7 +15,8 @@ export const SETDARK = (flag: boolean) => {
   localStorage.setItem("DARK", JSON.stringify(flag))
 }
 export const GETDARK = (): boolean => {
-  return localStorage.getItem("DARK") === "true"
+  const saved = localStorage.getItem("DARK")
+  return saved === null ? defaultSettings.dark : saved === "true"
 }
 //颜色主题
 export const SETCOLOR = (color: string) => {

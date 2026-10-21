@@ -18,10 +18,7 @@
 
 <script setup lang="ts">
 import { useSettingStore } from "@/stores/modules/setting"
-import "@wangeditor/editor/dist/css/style.css" // 引入 css
-import { onBeforeUnmount, shallowRef } from "vue"
 import type { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor"
-import { Editor, Toolbar } from "@wangeditor/editor-for-vue"
 const useSetting = useSettingStore()
 const props = withDefaults(
   defineProps<{

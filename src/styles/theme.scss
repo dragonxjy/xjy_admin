@@ -1,3 +1,5 @@
+@use "../config/public" as *;
+
 :root {
   color-scheme: light;
 
@@ -8,18 +10,25 @@
   --app-text-secondary: #333639;
   --app-text-muted: #767c82;
   --app-border: #efeff5;
-  --app-primary-soft: #eff0ff;
-  --app-primary: #646cff;
+  --app-primary-soft: color-mix(in srgb, var(--app-primary-color, #409eff) 10%, #fff);
+  --app-primary: var(--app-primary-color, #409eff);
   --app-success: #52c41a;
   --app-warning: #faad14;
   --app-danger: #f5222d;
   --app-info: #64748b;
   --app-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   --app-shadow-hover: 0 6px 20px rgb(15 23 42 / 6%);
-  --app-radius: 8px;
-  --app-gap: 16px;
-  --app-sidebar-width: 220px;
-  --app-sidebar-collapsed-width: 64px;
+  --app-radius: #{$layout-radius};
+  --app-gap: #{$layout-gap};
+  --app-sidebar-width: #{$layout-sidebar-width};
+  --app-sidebar-collapsed-width: #{$layout-sidebar-collapsed-width};
+  --app-menu-item-height: #{$layout-menu-item-height};
+  --app-menu-level-indent: #{$layout-menu-level-indent};
+  --app-menu-base-padding: #{$layout-menu-base-padding};
+  --app-menu-icon-size: #{$layout-menu-icon-size};
+  --app-menu-icon-gap: #{$layout-menu-icon-gap};
+  --app-menu-arrow-size: #{$layout-menu-arrow-size};
+  --app-menu-arrow-offset: #{$layout-menu-arrow-offset};
   --el-font-family: ui-sans-serif, system-ui, -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --el-border-radius-base: 6px;
   --el-border-radius-small: 4px;
@@ -36,8 +45,8 @@ html.dark {
   --app-text-secondary: #ffffffd1;
   --app-text-muted: #ffffff61;
   --app-border: #ffffff17;
-  --app-primary-soft: #303151;
-  --app-primary: #8b91ff;
+  --app-primary-soft: color-mix(in srgb, var(--app-primary-color, #409eff) 18%, #1c1c1c);
+  --app-primary: color-mix(in srgb, var(--app-primary-color, #409eff) 80%, #fff);
   --app-success: #67c23a;
   --app-warning: #e6a23c;
   --app-danger: #f56c6c;
@@ -104,68 +113,84 @@ body {
   outline-offset: 3px;
 }
 
-.el-card {
-  overflow: hidden;
-  line-height: 1.6;
-  border: 0;
-  border-radius: var(--app-radius);
-  box-shadow: var(--app-shadow);
-
-  --el-card-padding: 24px;
-  --el-card-bg-color: var(--app-surface);
-
-  &.is-always-shadow,
-  &.is-hover-shadow:hover {
+html {
+  .el-card {
+    overflow: hidden;
+    line-height: 1.6;
+    border: 0;
+    border-radius: var(--app-radius);
     box-shadow: var(--app-shadow);
+
+    --el-card-padding: 24px;
+    --el-card-bg-color: var(--app-surface);
+
+    &.is-always-shadow,
+    &.is-hover-shadow:hover {
+      box-shadow: var(--app-shadow);
+    }
   }
-}
 
-.el-button {
-  font-weight: 400;
-}
-
-.el-input__wrapper,
-.el-textarea__inner,
-.el-select__wrapper {
-  background: var(--app-surface);
-}
-
-.el-drawer {
-  --el-drawer-padding-primary: 24px;
-
-  .el-drawer__header {
-    padding-bottom: 20px;
-    margin-bottom: 0;
-    border-bottom: 1px solid var(--app-border);
+  .el-button {
+    font-weight: 400;
   }
-}
 
-.el-popper.is-light {
-  border-color: var(--app-border);
-  border-radius: var(--app-radius);
-  box-shadow: var(--app-shadow-hover);
-}
+  .el-input__wrapper,
+  .el-textarea__inner,
+  .el-select__wrapper {
+    background: var(--app-surface);
+  }
 
-.el-menu--popup {
-  min-width: 180px;
-  padding: 6px;
-  background: var(--app-surface);
-  border: 1px solid var(--app-border);
-  border-radius: var(--app-radius);
+  .el-drawer {
+    --el-drawer-padding-primary: 24px;
 
-  .el-menu-item,
-  .el-sub-menu__title {
-    height: 40px;
-    color: var(--app-text-secondary);
-    border-radius: 6px;
+    .el-drawer__header {
+      padding-bottom: 20px;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--app-border);
+    }
+  }
 
-    &:hover {
-      background: var(--app-surface-soft);
+  .el-popper.is-light {
+    border-color: var(--app-border);
+    border-radius: var(--app-radius);
+    box-shadow: var(--app-shadow-hover);
+  }
+
+  .el-menu--popup {
+    --el-menu-item-height: var(--app-menu-item-height);
+    --el-menu-sub-item-height: var(--app-menu-item-height);
+    --el-menu-base-level-padding: var(--app-menu-base-padding);
+    --el-menu-level-padding: var(--app-menu-level-indent);
+
+    min-width: 180px;
+    padding: 6px;
+    background: var(--app-surface);
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius);
+
+    .el-menu-item,
+    .el-sub-menu__title {
+      height: var(--app-menu-item-height);
+      color: var(--app-text-secondary);
+      border-radius: 6px;
+
+      &:hover {
+        background: var(--app-surface-soft);
+      }
+
+      &.is-active {
+        color: var(--el-color-primary);
+        background: var(--app-primary-soft);
+      }
     }
 
-    &.is-active {
-      color: var(--el-color-primary);
-      background: var(--app-primary-soft);
+    .el-sub-menu__title > .el-sub-menu__icon-arrow {
+      right: var(--app-menu-arrow-offset);
+      width: var(--app-menu-arrow-size);
+      height: var(--app-menu-arrow-size);
+      margin-top: calc(var(--app-menu-arrow-size) / -2);
+      margin-right: 0;
+      font-size: var(--app-menu-arrow-size);
     }
   }
 }
@@ -174,7 +199,7 @@ html:has(.layout-menu:not(.layout-min-menu)) .collapsed-navigation-popup {
   display: none;
 }
 
-@media (width < 640px) {
+@media (width < $layout-mobile-breakpoint) {
   .collapsed-navigation-popup {
     display: none;
   }

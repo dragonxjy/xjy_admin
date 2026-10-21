@@ -1,7 +1,9 @@
 <template>
   <div class="setting">
-    <button class="refresh" type="button" aria-label="刷新当前页面" title="刷新当前页面" @click="refresh" v-if="defaultSettings.isShowMenu">
-      <div ref="refreshRef" class="refreshContent"><el-icon :size="20"><Refresh /></el-icon></div>
+    <button class="refresh" type="button" aria-label="刷新当前页面" title="刷新当前页面" @click="refresh" v-if="defaultSettings.isShowRefresh">
+      <Transition name="refresh-turn" mode="out-in">
+        <span :key="refreshKey" class="refreshContent"><el-icon :size="20"><ElIconRefresh /></el-icon></span>
+      </Transition>
     </button>
     <button class="tab-full-screen" type="button" aria-label="全屏预览" title="全屏预览" @click="toggle" v-show="defaultSettings.isFullScreen">
       <img src="../../../../../assets/config/fullScreen.svg" alt="" v-show="!isFullscreen" />
@@ -11,25 +13,25 @@
       <img src="../../../../../assets/config/fullScreen.svg" alt="" v-show="!isFullscreen" />
       <img src="../../../../../assets/config/nofullScreen.svg" alt="" v-show="isFullscreen" />
     </button>
-    <button class="topic" type="button" aria-label="切换亮色或暗色主题" title="主题模式" @click="toggleDark">
+    <button v-if="defaultSettings.isShowThemeSwitch" class="topic" type="button" aria-label="切换亮色或暗色主题" title="主题模式" @click="toggleDark">
       <img src="../../../../../assets/config/dayTime.svg" alt="" v-show="!settingStore.dark" />
       <img src="../../../../../assets/config/blackSky.svg" alt="" v-show="settingStore.dark" />
     </button>
     <button class="set" type="button" aria-label="主题配置" title="主题配置" @click="set" v-show="defaultSettings.isSet">
-      <el-icon :size="20"><Setting /></el-icon>
+      <el-icon :size="20"><ElIconSetting /></el-icon>
     </button>
     <div class="setting-user">
       <el-dropdown trigger="click">
         <button class="user" type="button" aria-label="用户菜单">
           <el-avatar :size="24" :src="userStore.userinfo.avatar" @error="() => true">
-            <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" alt="" />
+            <img :src="basic.fallbackAvatar" alt="" />
           </el-avatar>
           <span class="nickname">{{ userStore.userinfo.username }}</span>
         </button>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="goUrl"><el-icon><Link /></el-icon>项目地址</el-dropdown-item>
-            <el-dropdown-item @click="loginOut"><el-icon><SwitchButton /></el-icon>退出登录</el-dropdown-item>
+            <el-dropdown-item @click="goUrl"><el-icon><ElIconLink /></el-icon>项目地址</el-dropdown-item>
+            <el-dropdown-item @click="loginOut"><el-icon><ElIconSwitchButton /></el-icon>退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -39,7 +41,8 @@
 </template>
 
 <script setup lang="ts">
-import { defaultSettings } from "@/config/setting"
+import { useRoute, useRouter } from "vue-router"
+import { basic, defaultSettings } from "@/config/setting"
 import { useFullscreen } from "@vueuse/core"
 import { useSettingStore } from "@/stores/modules/setting"
 import { useUserStore } from "@/stores/modules/user"
@@ -52,21 +55,10 @@ const router = useRouter()
 const route = useRoute()
 
 // 刷新
-const refreshRef = ref<HTMLDivElement | null>(null)
+const refreshKey = ref(0)
 const refresh = () => {
   settingStore.changeFlush()
-  const element = refreshRef.value
-  if (!element) return
-  // 添加类
-  element.classList.add("animate__animated", "animate__rotateIn")
-  // 等动画结束，移除类及本次监听
-  element.addEventListener(
-    "animationend",
-    () => {
-      element.classList.remove("animate__animated", "animate__rotateIn")
-    },
-    { once: true },
-  )
+  refreshKey.value++
 }
 // 退出登录
 const loginOut = async () => {
@@ -173,7 +165,7 @@ const set = () => {
   }
 }
 
-@media (width < 640px) {
+@media (width < $layout-mobile-breakpoint) {
   .setting {
     .full_Screen {
       display: none;

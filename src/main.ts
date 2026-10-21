@@ -1,6 +1,5 @@
 import { createApp } from "vue"
 import storePinia from "./stores/index"
-import component from "@/components/index"
 import App from "./App.vue"
 import router from "./router"
 import "element-plus/theme-chalk/dark/css-vars.css"
@@ -16,7 +15,6 @@ import "./mock/index"
 import "./permission"
 
 const app = createApp(App)
-app.use(component)
 app.use(storePinia)
 app.use(router)
 app.mount("#app")

@@ -14,10 +14,10 @@
         class="desktop-menu"
         popper-class="collapsed-navigation-popup"
         router
-        :default-active="$route.path"
+        :default-active="route.path"
         :collapse="flag"
         :collapse-transition="true"
-        :active-text-color="variables['menu-active-text']"
+        active-text-color="var(--el-color-primary)"
       >
         <MenuItem :menuRouteList="routerMenuList" />
       </el-menu>
@@ -34,9 +34,9 @@
         <MenuLogo />
         <el-menu
           router
-          :default-active="$route.path"
+          :default-active="route.path"
           :collapse="false"
-          :active-text-color="variables['menu-active-text']"
+          active-text-color="var(--el-color-primary)"
           @select="settingStore.changeFlag"
         >
           <MenuItem :menuRouteList="routerMenuList" />
@@ -59,32 +59,34 @@
       <!-- 主体部分 -->
       <div class="main-content">
         <router-view v-if="isflag" v-slot="{ Component }">
-          <transition
-            :enter-active-class="`animate__animated ${defaultSettings.routerAnimateInType} animate__faster`"
+          <Transition
+            name="app-fade"
+            :css="defaultSettings.routeTransition"
             mode="out-in"
           >
-            <keep-alive>
-              <component :is="Component" :key="$route.path" />
-            </keep-alive>
-          </transition>
+            <KeepAlive :max="defaultSettings.pageCacheLimit">
+              <component :is="Component" :key="route.path" />
+            </KeepAlive>
+          </Transition>
         </router-view>
       </div>
-      <footer class="layout-footer">Copyright © xjy_admin</footer>
+      <footer v-if="defaultSettings.isShowFooter" class="layout-footer">{{ basic.footer }}</footer>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import variables from "@/styles/variables.module.scss"
-import { defaultSettings } from "@/config/setting"
+import { useRoute } from "vue-router"
+import { basic, defaultSettings } from "@/config/setting"
 import { useSettingStore } from "@/stores/modules/setting"
 import { useUserStore } from "@/stores/modules/user"
 
 import { storeToRefs } from "pinia"
+const route = useRoute()
 const settingStore = useSettingStore()
 const userStore = useUserStore()
 const { routerMenuList } = storeToRefs(userStore)
-const { flag, dark, page_setting } = storeToRefs(settingStore)
+const { flag, dark } = storeToRefs(settingStore)
 let isflag = ref(true)
 // 刷新
 watch(

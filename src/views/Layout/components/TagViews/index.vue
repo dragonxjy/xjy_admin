@@ -4,30 +4,45 @@
     class="tagView"
   >
     <el-scrollbar>
-      <div class="tags animate__animated animate__fadeInDown animate__faster">
-        <template v-for="(item, i) in tagViewArr" :key="item.title">
-          <el-tag
-            :closable="tagViewArr.length !== 1 && i !== 0"
-            @close="closeTag(i, item.path)"
-            @click="changeTag(item)"
-            :class="{ tagItem: true, activeTag: route.path === item.path }"
-          >
-            <ChromeTabBackground />
-            <div class="tagContent">
-              <el-icon>
-                <HomeFilled v-if="item.path === '/home'" />
-                <Document v-else />
-              </el-icon>
-              <text>{{ item.title }}</text>
-            </div>
-          </el-tag>
-        </template>
-      </div>
+      <TransitionGroup tag="div" name="app-fade" class="tags" appear>
+        <el-tag
+          v-for="(item, i) in tagViewArr"
+          :key="item.path"
+          :closable="tagViewArr.length !== 1 && i !== 0"
+          @close="closeTag(i, item.path)"
+          @click="changeTag(item)"
+          :class="{ tagItem: true, activeTag: route.path === item.path }"
+        >
+          <svg class="chrome-tab-background" aria-hidden="true">
+            <defs>
+              <symbol id="xjy-tab-edge" viewBox="0 0 214 36">
+                <path d="M17 0h197v36H0v-2c4.5 0 9-3.5 9-8V8c0-4.5 3.5-8 8-8z" />
+              </symbol>
+            </defs>
+            <svg width="51%" height="100%">
+              <use href="#xjy-tab-edge" width="214" height="36" fill="currentColor" />
+            </svg>
+            <g transform="scale(-1, 1)">
+              <svg width="51%" height="100%" x="-100%">
+                <use href="#xjy-tab-edge" width="214" height="36" fill="currentColor" />
+              </svg>
+            </g>
+          </svg>
+          <div class="tagContent">
+            <el-icon>
+              <ElIconHomeFilled v-if="item.path === '/home'" />
+              <ElIconDocument v-else />
+            </el-icon>
+            <text>{{ item.title }}</text>
+          </div>
+        </el-tag>
+      </TransitionGroup>
     </el-scrollbar>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useRoute, useRouter } from "vue-router"
 import { useSettingStore } from "@/stores/modules/setting"
 const settingStore = useSettingStore()
 const router = useRouter()
@@ -140,14 +155,20 @@ const closeTag = (i: number, path: string) => {
       background: var(--app-border);
     }
 
-    :deep(.chrome-tab-background) {
+    .chrome-tab-background {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
       color: transparent;
+      pointer-events: none;
     }
 
     &:hover {
       z-index: 9;
 
-      :deep(.chrome-tab-background) {
+      .chrome-tab-background {
         color: var(--app-surface-soft);
       }
     }
@@ -173,7 +194,7 @@ const closeTag = (i: number, path: string) => {
       z-index: var(--app-z-tabs);
       color: var(--el-color-primary);
 
-      :deep(.chrome-tab-background) {
+      .chrome-tab-background {
         color: var(--app-primary-soft);
       }
     }

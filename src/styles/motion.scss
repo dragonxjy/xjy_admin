@@ -1,3 +1,5 @@
+@use "../config/public" as *;
+
 // Interpolate shared theme colors once; descendants consume the same frame.
 @each $token, $initial in (
   "bg": #f7fafc,
@@ -7,8 +9,8 @@
   "text-secondary": #333639,
   "text-muted": #767c82,
   "border": #efeff5,
-  "primary-soft": #eff0ff,
-  "primary": #646cff,
+  "primary-soft": #ecf5ff,
+  "primary": #409eff,
   "success": #52c41a,
   "warning": #faad14,
   "danger": #f5222d,
@@ -22,15 +24,15 @@
 }
 
 :root {
-  --app-motion-duration: 300ms;
+  --app-motion-duration: #{$motion-duration};
   --app-sidebar-duration: var(--app-motion-duration);
-  --app-sidebar-easing: ease-in-out;
-  --app-motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
-  --app-z-header: 20;
-  --app-z-tabs: 10;
-  --app-z-sidebar: 30;
-  --app-z-mobile-navigation: 100;
-  --app-z-settings: 4000;
+  --app-sidebar-easing: #{$sidebar-easing};
+  --app-motion-easing: #{$motion-easing};
+  --app-z-header: #{$z-header};
+  --app-z-tabs: #{$z-tabs};
+  --app-z-sidebar: #{$z-sidebar};
+  --app-z-mobile-navigation: #{$z-mobile-navigation};
+  --app-z-settings: #{$z-settings};
   --el-transition-duration: var(--app-motion-duration);
   --el-transition-duration-fast: var(--app-motion-duration);
   --el-transition-function-ease-in-out-bezier: var(--app-motion-easing);
@@ -39,7 +41,6 @@
   --el-transition-color: none;
   --el-transition-border: none;
   --el-transition-box-shadow: none;
-  --animate-duration: var(--app-motion-duration);
 
   transition: --app-bg var(--app-motion-duration) var(--app-motion-easing),
     --app-surface var(--app-motion-duration) var(--app-motion-easing),
@@ -56,30 +57,55 @@
     --app-info var(--app-motion-duration) var(--app-motion-easing);
 }
 
-// These components otherwise animate a second time after the root color changes.
-.el-card,
-.el-button,
-.el-menu-item,
-.el-sub-menu__title,
-.el-breadcrumb__inner,
-.el-breadcrumb__separator,
-.el-switch__core,
-.el-checkbox__inner,
-.el-radio__inner {
-  transition: none;
+html {
+  // These components otherwise animate a second time after the root color changes.
+  .el-card,
+  .el-button,
+  .el-menu-item,
+  .el-sub-menu__title,
+  .el-breadcrumb__inner,
+  .el-breadcrumb__separator,
+  .el-switch__core,
+  .el-checkbox__inner,
+  .el-radio__inner {
+    transition: none;
+  }
+
+  .el-drawer {
+    transition: transform var(--app-motion-duration) var(--app-motion-easing);
+  }
+
+  .el-switch__action {
+    transition: left var(--app-motion-duration) var(--app-motion-easing), transform var(--app-motion-duration) var(--app-motion-easing);
+  }
 }
 
-.el-drawer {
-  transition: transform var(--app-motion-duration) var(--app-motion-easing);
+// Vue Transition / TransitionGroup：只淡入，不添加左右滑动或位移动画。
+.app-fade-enter-active,
+.app-fade-appear-active {
+  transition: opacity var(--app-motion-duration) var(--app-motion-easing);
 }
 
-.el-switch__action {
-  transition: left var(--app-motion-duration) var(--app-motion-easing), transform var(--app-motion-duration) var(--app-motion-easing);
+.app-fade-enter-from,
+.app-fade-appear-from {
+  opacity: 0;
 }
 
-.animate__animated.animate__fast,
-.animate__animated.animate__faster {
-  animation-duration: var(--app-motion-duration);
+// 刷新图标通过 Vue 的 key 重建触发动画，不再手动操作 DOM 类名和监听器。
+.refresh-turn-enter-active {
+  animation: refresh-turn var(--app-motion-duration) var(--app-motion-easing);
+}
+
+@keyframes refresh-turn {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(0);
+  }
 }
 
 .settings-overlay {
