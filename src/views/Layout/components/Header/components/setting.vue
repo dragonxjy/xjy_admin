@@ -41,11 +41,10 @@
 <script setup lang="ts">
 import { defaultSettings } from "@/config/setting"
 import { useFullscreen } from "@vueuse/core"
-import { GETDARK } from "@/utils/local"
 import { useSettingStore } from "@/stores/modules/setting"
 import { useUserStore } from "@/stores/modules/user"
 import { toggleDark } from "@/utils/changeDark"
-import { messageBox, notification } from "@/Hooks/element"
+import { messageBox } from "@/Hooks/element"
 const { isFullscreen, toggle } = useFullscreen()
 const settingStore = useSettingStore()
 const userStore = useUserStore()
@@ -53,19 +52,29 @@ const router = useRouter()
 const route = useRoute()
 
 // 刷新
-const refreshRef = ref()
+const refreshRef = ref<HTMLDivElement | null>(null)
 const refresh = () => {
   settingStore.changeFlush()
+  const element = refreshRef.value
+  if (!element) return
   // 添加类
-  refreshRef.value!.classList.add("animate__animated", "animate__rotateIn")
-  // 等动画结束，移除类
-  refreshRef.value.addEventListener("animationend", () => {
-    refreshRef.value!.classList.remove("animate__animated", "animate__rotateIn")
-  })
+  element.classList.add("animate__animated", "animate__rotateIn")
+  // 等动画结束，移除类及本次监听
+  element.addEventListener(
+    "animationend",
+    () => {
+      element.classList.remove("animate__animated", "animate__rotateIn")
+    },
+    { once: true },
+  )
 }
 // 退出登录
 const loginOut = async () => {
-  await messageBox("提示", "您确定要退出登录吗？", "primary")
+  try {
+    await messageBox("提示", "您确定要退出登录吗？", "primary")
+  } catch {
+    return
+  }
   userStore.loginOut()
   router.push({
     path: "/login",

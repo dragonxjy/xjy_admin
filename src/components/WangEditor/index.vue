@@ -19,28 +19,32 @@
 <script setup lang="ts">
 import { useSettingStore } from "@/stores/modules/setting"
 import "@wangeditor/editor/dist/css/style.css" // 引入 css
-import { onBeforeUnmount, ref, shallowRef, onMounted } from "vue"
+import { onBeforeUnmount, shallowRef } from "vue"
+import type { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor"
 import { Editor, Toolbar } from "@wangeditor/editor-for-vue"
 const useSetting = useSettingStore()
 const props = withDefaults(
   defineProps<{
-    height: string
+    height?: string
   }>(),
   {
     height: "560px",
   },
 )
 
-const valueHtml = defineModel()
+const valueHtml = defineModel<string>()
 // 编辑器实例，必须用 shallowRef
-const editorRef = shallowRef()
-const toolbarConfig = {}
-const editorConfig = {
+const editorRef = shallowRef<IDomEditor>()
+const toolbarConfig: Partial<IToolbarConfig> = {}
+const editorConfig: Partial<IEditorConfig> = {
   placeholder: "请输入内容...",
   MENU_CONF: {
     uploadImage: {
       // 自定义图片上传
-      async customUpload(file: any, insertFn: any) {
+      async customUpload(
+        file: File,
+        insertFn: (url: string, alt?: string, href?: string) => void,
+      ) {
         console.log(file, insertFn)
         // 调用后端接口，上传图片
         // 拿到上传路劲插入编辑器
@@ -57,7 +61,7 @@ onBeforeUnmount(() => {
   editor.destroy()
 })
 
-const handleCreated = (editor: any) => {
+const handleCreated = (editor: IDomEditor) => {
   editorRef.value = editor // 记录 editor 实例，重要！
 }
 </script>

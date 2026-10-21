@@ -12,8 +12,8 @@ export const REMOVETOKEN = () => {
 export const SETDARK = (flag: boolean) => {
   localStorage.setItem("DARK", JSON.stringify(flag))
 }
-export const GETDARK = () => {
-  return JSON.parse(localStorage.getItem("DARK") as string)
+export const GETDARK = (): boolean => {
+  return localStorage.getItem("DARK") === "true"
 }
 //颜色主题
 export const SETCOLOR = (color: string) => {

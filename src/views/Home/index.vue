@@ -43,10 +43,10 @@
 
     <div class="EChart_Group home-grid">
       <el-card class="chart-card grid-main" aria-label="访问量图表">
-        <div class="chart-surface"><div class="line"><component :is="chartComponent('line')" /></div></div>
+        <div class="chart-surface"><div class="line"><LineChart /></div></div>
       </el-card>
       <el-card class="chart-card grid-aside" aria-label="前端结业率图表">
-        <div class="chart-surface"><div class="pie"><component :is="chartComponent('pie')" /></div></div>
+        <div class="chart-surface"><div class="pie"><PieChart /></div></div>
       </el-card>
     </div>
 
@@ -107,7 +107,6 @@
 import { useUserStore } from "@/stores/modules/user"
 import { basic } from "../../config/setting"
 const userStore = useUserStore()
-const router = useRouter()
 const goVue = () => {
   window.open("https://cn.vuejs.org/guide/introduction.html")
 }
@@ -130,9 +129,8 @@ const goDocument = () => {
   window.open("https://juejin.cn/post/7380283122489081856")
 }
 // 异步加载图表
-const chartComponent = (val: string) => {
-  return defineAsyncComponent(() => import(`./components/${val}.vue`))
-}
+const LineChart = defineAsyncComponent(() => import("./components/line.vue"))
+const PieChart = defineAsyncComponent(() => import("./components/pie.vue"))
 </script>
 
 <style scoped lang="scss">

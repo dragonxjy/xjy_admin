@@ -22,7 +22,7 @@ export const useSettingStore = defineStore(
     /**
      * @主题相关
      */
-    const dark = ref(false || GETDARK())
+    const dark = ref(GETDARK())
     const changeDark = () => {
       dark.value = !dark.value
       SETDARK(dark.value)

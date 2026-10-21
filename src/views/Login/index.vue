@@ -18,7 +18,7 @@
         <main class="login-main">
           <h2>欢迎回来</h2>
           <p class="login-description">登录账号，开启今天的工作。</p>
-          <el-form :model="loginParams" :rules="rules" class="login-form" label-position="top">
+          <el-form ref="loginFormRef" :model="loginParams" :rules="rules" class="login-form" label-position="top">
             <el-form-item prop="username" label="用户名">
               <el-input placeholder="请输入用户名" v-model="loginParams.username" aria-label="用户名" autocomplete="username" />
             </el-form-item>
@@ -48,50 +48,51 @@
 </template>
 
 <script setup lang="ts">
-import { message, notification } from "@/Hooks/element"
+import type { FormInstance, FormItemRule, FormRules } from "element-plus"
+import { message } from "@/Hooks/element"
 import { basic } from "../../config/setting"
 import { useUserStore } from "@/stores/modules/user"
 const router = useRouter()
 const route = useRoute()
 const userStore = useUserStore()
+const loginFormRef = ref<FormInstance>()
 const loginParams = reactive({
   username: "admin",
   password: 123456,
 })
-const validateUser = (rule: any, value: any, callback: any) => {
-  if (value.length < 4) {
-    callback(new Error("用户名长度必须大于4位"))
+const validateUser: FormItemRule["validator"] = (_rule, value, callback) => {
+  if (String(value ?? "").length < 4) {
+    callback(new Error("用户名至少需要4位"))
   } else {
     callback()
   }
 }
-const validatePass = (rule: any, value: any, callback: any) => {
-  if (value.length < 6) {
-    callback(new Error("密码长度必须大于6位"))
+const validatePass: FormItemRule["validator"] = (_rule, value, callback) => {
+  if (String(value ?? "").length < 6) {
+    callback(new Error("密码至少需要6位"))
   } else {
     callback()
   }
 }
-let rules = reactive({
+const rules = reactive<FormRules<typeof loginParams>>({
   username: [
-    // { required: true, message: '用户名不能为空', trigger: 'blur' },
-    // { min: 5, max: 10, message: '用户名长度在6到10位之间', trigger: 'change' },
     { required: true, validator: validateUser, trigger: "change" },
   ],
   password: [
-    // { required: true, message: '密码不能为空', trigger: 'blur' },
-    // { min: 6, max: 15, message: '密码长度在6到15位之间', trigger: 'change' },
     { required: true, validator: validatePass, trigger: "change" },
   ],
 })
 const login = async () => {
+  if (!loginFormRef.value) return
+  const valid = await loginFormRef.value.validate().catch(() => false)
+  if (!valid) return
+
   try {
-    const mes = await userStore.loginUp(loginParams)
-    router.push({ path: route.query.url as any })
-    // window.location.reload()
-    //  notification(mes, "您好，欢迎回来!", "success")
-  } catch (err: any) {
-    message("error", err.message)
+    await userStore.loginUp({ ...loginParams, password: Number(loginParams.password) })
+    const redirect = route.query.url
+    await router.push({ path: typeof redirect === "string" ? redirect : "/home" })
+  } catch (err: unknown) {
+    message("error", err instanceof Error ? err.message : "登录失败，请稍后重试")
   }
 }
 </script>

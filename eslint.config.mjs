@@ -25,7 +25,6 @@ export default [
       "no-var": "error",
       // Preserve the existing JavaScript style during this dependency update.
       "prefer-const": "off",
-      "no-constant-binary-expression": "off",
       "no-useless-assignment": "off",
       "no-useless-escape": "off",
       "@typescript-eslint/no-unused-vars": "off",

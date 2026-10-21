@@ -1,7 +1,7 @@
 type error_code_type = {
   [key: string]: string
 }
-export const error_code = (code: string) => {
+export const error_code = (code?: string | number) => {
   const errorCode: error_code_type = {
     "400": "请求异常",
     "401": "认证失败，无法访问系统资源",
@@ -17,5 +17,5 @@ export const error_code = (code: string) => {
     "504": "服务响应超时",
     "505": "HTTP版本不受支持",
   }
-  return errorCode[code]
+  return errorCode[code ?? ""]
 }

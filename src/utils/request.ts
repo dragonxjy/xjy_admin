@@ -1,8 +1,7 @@
 import { message } from "@/Hooks/element"
-import { useUserStore } from "@/stores/modules/user"
 
 import axios from "axios"
-import type { Method, AxiosRequestConfig } from "axios"
+import type { AxiosError, Method, AxiosRequestConfig } from "axios"
 import { error_code } from "./error-code"
 import { GETTOKEN } from "./local"
 const service = axios.create({
@@ -11,9 +10,9 @@ const service = axios.create({
 })
 // 请求拦截器
 service.interceptors.request.use((config) => {
-  const userStore = useUserStore()
-  if (GETTOKEN()) {
-    config.headers.Token = GETTOKEN()
+  const token = GETTOKEN()
+  if (token) {
+    config.headers.Token = token
   }
   return config
 })
@@ -21,9 +20,9 @@ service.interceptors.request.use((config) => {
 // 响应拦截器
 service.interceptors.response.use(
   (response) => response.data,
-  (err) => {
-    message("error", error_code(err.response.status) || "网络问题")
-    return Promise.reject(new Error(err))
+  (err: AxiosError) => {
+    message("error", error_code(err.response?.status) || "网络问题")
+    return Promise.reject(err)
   },
 )
 type Data<T> = {

@@ -4,12 +4,15 @@
 
 <script setup lang="ts">
 import * as echarts from "echarts"
-const lineRef = ref()
-onMounted(() => {})
-nextTick(() => {
-  let myChart = echarts.init(lineRef.value)
+import { useResizeObserver } from "@vueuse/core"
+const lineRef = ref<HTMLDivElement | null>(null)
+let myChart: echarts.ECharts | undefined
 
-  let option = {
+onMounted(() => {
+  if (!lineRef.value) return
+  myChart = echarts.init(lineRef.value)
+
+  const option: echarts.EChartsOption = {
     tooltip: {
       trigger: "axis",
       axisPointer: {
@@ -136,10 +139,15 @@ nextTick(() => {
       },
     ],
   }
-  window.addEventListener("resize", () => {
-    myChart.resize()
-  })
-  option && myChart.setOption(option)
+  myChart.setOption(option)
+})
+
+useResizeObserver(lineRef, () => {
+  myChart?.resize()
+})
+
+onBeforeUnmount(() => {
+  myChart?.dispose()
 })
 </script>
 

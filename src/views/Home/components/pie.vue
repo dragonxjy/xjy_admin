@@ -4,13 +4,16 @@
 
 <script setup lang="ts">
 import * as echarts from "echarts"
-import { nextTick, onMounted, ref } from "vue"
-const pieRef = ref()
+import { useResizeObserver } from "@vueuse/core"
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
+const pieRef = ref<HTMLDivElement | null>(null)
+let myChart: echarts.ECharts | undefined
 onMounted(() => {
   nextTick(() => {
-    let myChart = echarts.init(pieRef.value)
+    if (!pieRef.value) return
+    myChart = echarts.init(pieRef.value)
 
-    let option = {
+    const option: echarts.EChartsOption = {
       color: ["#132C61", "#00FFFF", "#F5DEB3", "#f73303", "#FFDB5C"],
       legend: {
         top: "bottom",
@@ -44,11 +47,16 @@ onMounted(() => {
         },
       ],
     }
-    option && myChart.setOption(option)
-    window.addEventListener("resize", () => {
-      myChart.resize()
-    })
+    myChart.setOption(option)
   })
+})
+
+useResizeObserver(pieRef, () => {
+  myChart?.resize()
+})
+
+onBeforeUnmount(() => {
+  myChart?.dispose()
 })
 </script>
 

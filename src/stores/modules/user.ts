@@ -4,8 +4,8 @@ import { anyRouter, asyncRouter, constRouter } from "@/router/route"
 import { GETTOKEN, REMOVETOKEN, SETTOKEN } from "@/utils/local"
 import cloneDeep from "lodash/cloneDeep"
 import { defineStore } from "pinia"
-import { nextTick, ref } from "vue"
-import type { RouteLocationOptions } from "vue-router"
+import { ref } from "vue"
+import type { RouteRecordRaw } from "vue-router"
 interface loginParams {
   username: string
   password: number
@@ -16,7 +16,7 @@ export const useUserStore = defineStore(
     /***
      * @登录
      */
-    const token = ref("" || GETTOKEN())
+    const token = ref(GETTOKEN() ?? "")
     const userinfo = ref(<any>{})
     // 用户登录
     const loginUp = async (loginParams: loginParams) => {
@@ -35,11 +35,12 @@ export const useUserStore = defineStore(
      */
 
     // 路由表
-    const routerMenuList = ref(constRouter as RouteLocationOptions[])
+    const routerMenuList = ref<RouteRecordRaw[]>(constRouter)
+    const removeRoutes: Array<() => void> = []
     // // 权限路过滤
-    const filterRoute = (routes: any, asyncRoute: any) => {
-      return asyncRoute.filter((route: any) => {
-        if (routes.includes(route.name)) {
+    const filterRoute = (routes: string[], asyncRoute: RouteRecordRaw[]): RouteRecordRaw[] => {
+      return asyncRoute.filter((route) => {
+        if (typeof route.name === "string" && routes.includes(route.name)) {
           if (route.children && route.children.length > 0) {
             route.children = filterRoute(routes, route.children)
           }
@@ -64,8 +65,8 @@ export const useUserStore = defineStore(
         // 异步路由+任意路由
         const asyncRoutes = [...lastAsyncRoute, ...anyRouter]
         // 添加路由
-        asyncRoutes.forEach((item: any) => {
-          router.addRoute(item)
+        asyncRoutes.forEach((item) => {
+          removeRoutes.push(router.addRoute(item))
         })
       } else {
         return Promise.reject(new Error(res.message))
@@ -73,18 +74,18 @@ export const useUserStore = defineStore(
     }
     // 重置路由
     const resetRoutes = () => {
-      //移除所有路由
-      routerMenuList.value.forEach((route: any) => {
-        router.removeRoute(route.name)
-      })
+      // 仅移除当前用户动态添加的路由，保留基础页面
+      removeRoutes.forEach((removeRoute) => removeRoute())
+      removeRoutes.length = 0
     }
 
     // 退出登录
     const loginOut = () => {
+      resetRoutes()
       REMOVETOKEN()
+      token.value = ""
       userinfo.value = {}
       routerMenuList.value = []
-      resetRoutes()
     }
 
     return {

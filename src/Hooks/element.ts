@@ -1,8 +1,12 @@
 import { ElMessage, ElMessageBox, ElNotification } from "element-plus"
+import type {
+  ElMessageBoxOptions,
+  MessageType,
+  NotificationType,
+} from "element-plus"
 // 提示
-export const message = (type: string, message: string) => {
+export const message = (type: MessageType, message: string) => {
   ElMessage({
-    // @ts-expect-error 禁止飘红
     message,
     type,
     plain: true,
@@ -10,9 +14,12 @@ export const message = (type: string, message: string) => {
   })
 }
 // 通知
-export const notification = (title: string, message: string, type: string) => {
+export const notification = (
+  title: string,
+  message: string,
+  type: NotificationType,
+) => {
   ElNotification({
-    //@ts-expect-error 禁止飘红
     title,
     message,
     type,
@@ -24,20 +31,11 @@ export const notification = (title: string, message: string, type: string) => {
 export const messageBox = async (
   title: string,
   content: string,
-  type: string,
+  type: ElMessageBoxOptions["type"],
 ) => {
-  await new Promise((resolve, reject) => {
-    //@ts-expect-error 禁止飘红
-    ElMessageBox.confirm(content, title, {
-      confirmButtonText: "确定",
-      cancelButtonText: "取消",
-      type,
-    })
-      .then(() => {
-        resolve("ok")
-      })
-      .catch(() => {
-        reject("用户点击取消！")
-      })
+  await ElMessageBox.confirm(content, title, {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type,
   })
 }
