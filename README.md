@@ -1,3 +1,5 @@
+# xjy_admin
+
 <div align="center">
   <img src="src/assets/logo.png" width="72" alt="xjy_admin Logo" />
   <h1>xjy_admin</h1>
@@ -43,7 +45,7 @@
 - Node.js **22.13+（22.x）或 24+**
 - pnpm **12.14.0**
 
-版本约束见 [package.json](package.json)，完整依赖版本由 [pnpm-lock.yaml](pnpm-lock.yaml) 固定。
+版本约束见 package.json，完整依赖版本由 pnpm-lock.yaml 固定。
 
 ### 安装与启动
 
@@ -63,7 +65,7 @@ pnpm dev
 | 管理员   | `admin` | `123456` | 首页、文档、Canvas、分页器、富文本及多级菜单 |
 | 普通用户 | `user`  | `123456` | 首页、文档、富文本编辑器                     |
 
-账号与权限数据位于 [src/mock/index.ts](src/mock/index.ts)。
+账号与权限数据位于 src/mock/index.ts。
 
 ## 常用命令
 
@@ -79,7 +81,7 @@ pnpm dev
 
 ## 页面预览
 
-以下截图采集于 **2026-10-20**，来自当前项目的本地生产构建。桌面视口宽度为 `1440px`，移动端视口为 `390 × 844px`；图片保存在 [docs/screenshots](docs/screenshots/)。
+以下截图采集于 **2026-10-20**，来自当前项目的本地生产构建。桌面视口宽度为 `1440px`，移动端视口为 `390 × 844px`；图片保存在 docs/screenshots。
 
 ### 桌面端
 
@@ -209,25 +211,25 @@ xjy_admin/
 
 | 配置内容                         | 文件位置                                                       |
 | -------------------------------- | -------------------------------------------------------------- |
-| 项目名称、Logo、默认界面选项     | [src/config/setting.ts](src/config/setting.ts)                 |
-| 主题颜色、间距、圆角、侧栏宽度   | [src/styles/theme.scss](src/styles/theme.scss)                 |
-| 主题过渡、侧栏动效时长、浮层层级 | [src/styles/motion.scss](src/styles/motion.scss)               |
-| Element Plus Sass 主题           | [src/styles/element/index.scss](src/styles/element/index.scss) |
-| 全局样式入口                     | [src/styles/index.scss](src/styles/index.scss)                 |
-| 布局与响应式样式                 | [src/views/Layout/index.scss](src/views/Layout/index.scss)     |
+| 项目名称、Logo、默认界面选项     | src/config/setting.ts                                         |
+| 主题颜色、间距、圆角、侧栏宽度   | src/styles/theme.scss                                         |
+| 主题过渡、侧栏动效时长、浮层层级 | src/styles/motion.scss                                        |
+| Element Plus Sass 主题           | src/styles/element/index.scss                                 |
+| 全局样式入口                     | src/styles/index.scss                                         |
+| 布局与响应式样式                 | src/views/Layout/index.scss                                   |
 
 基础过渡时长通过 `--app-motion-duration` 统一配置，默认为 `300ms`。桌面侧栏使用 Element Plus 原生折叠动画，侧栏时长由 `--app-sidebar-duration` 控制。设置抽屉的层级高于导航与菜单弹层。
 
 ### 菜单与权限
 
-路由定义位于 [src/router/route.ts](src/router/route.ts)，通过 `meta.title`、`meta.icon` 和 `meta.isShow` 配置菜单名称、图标及显示状态。权限菜单由用户信息与动态路由配置共同生成，入口见 [src/permission.ts](src/permission.ts) 和 [src/stores/modules/user.ts](src/stores/modules/user.ts)。
+路由定义位于 src/router/route.ts，通过 `meta.title`、`meta.icon` 和 `meta.isShow` 配置菜单名称、图标及显示状态。权限菜单由用户信息与动态路由配置共同生成，入口见 src/permission.ts 和 src/stores/modules/user.ts。
 
 ### Mock 与接口
 
-当前在 [src/main.ts](src/main.ts) 中加载 Mock 数据，登录和用户信息接口定义于 [src/mock/index.ts](src/mock/index.ts)，请求封装位于 [src/utils/request.ts](src/utils/request.ts)。
+当前在 src/main.ts 中加载 Mock 数据，登录和用户信息接口定义于 src/mock/index.ts，请求封装位于 src/utils/request.ts。
 
 - `VITE_BASE_URL`：接口请求前缀，默认 `/api`。
-- `VITE_URL`：开发代理的目标地址，在 [vite.config.ts](vite.config.ts) 中使用。
+- `VITE_URL`：开发代理的目标地址，在 vite.config.ts 中使用。
 
 接入后端时，根据实际服务调整 Mock 入口、环境变量及接口返回结构；生产环境的接口转发由部署服务器配置。
 
@@ -245,4 +247,4 @@ pnpm preview
 
 ## 许可证
 
-项目采用 [Mulan PSL v2](LICENSE)。随附资源的独立许可保存在 [docs/licenses](docs/licenses/)。
+项目采用 Mulan PSL v2。随附资源的独立许可保存在 docs/licenses。
